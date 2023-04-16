@@ -34,8 +34,8 @@ const Login = () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             email: emailRef.current.value,
-            password: passwordRef.current.value,
-          }),
+            password: passwordRef.current.value
+          })
         });
         mutate({ user: response.user }, false);
         toast.success('You have been logged in.');
@@ -55,44 +55,38 @@ const Login = () => {
         <form onSubmit={onSubmit}>
           <Input
             ref={emailRef}
-            htmlType="email"
-            autoComplete="email"
-            placeholder="Email Address"
-            ariaLabel="Email Address"
-            size="large"
+            htmlType='email'
+            autoComplete='email'
+            placeholder='Email Address'
+            ariaLabel='Email Address'
+            size='large'
             required
           />
-          <Spacer size={0.5} axis="vertical" />
+          <Spacer size={0.5} axis='vertical' />
           <Input
             ref={passwordRef}
-            htmlType="password"
-            autoComplete="current-password"
-            placeholder="Password"
-            ariaLabel="Password"
-            size="large"
+            htmlType='password'
+            autoComplete='current-password'
+            placeholder='Password'
+            ariaLabel='Password'
+            size='large'
             required
           />
-          <Spacer size={0.5} axis="vertical" />
-          <Button
-            htmlType="submit"
-            className={styles.submit}
-            type="success"
-            size="large"
-            loading={isLoading}
-          >
+          <Spacer size={0.5} axis='vertical' />
+          <Button htmlType='submit' className={styles.submit} type='success' size='large' loading={isLoading}>
             Log in
           </Button>
-          <Spacer size={0.25} axis="vertical" />
-          <Link href="/forget-password" passHref>
-            <ButtonLink type="success" size="large" variant="ghost">
+          <Spacer size={0.25} axis='vertical' />
+          <Link href='/forget-password' passHref legacyBehavior>
+            <ButtonLink type='success' size='large' variant='ghost'>
               Forget password
             </ButtonLink>
           </Link>
         </form>
       </div>
       <div className={styles.footer}>
-        <Link href="/sign-up" passHref>
-          <TextLink color="link" variant="highlight">
+        <Link href='/sign-up' passHref>
+          <TextLink color='link' variant='highlight'>
             Don&apos;t have an account? Sign Up
           </TextLink>
         </Link>

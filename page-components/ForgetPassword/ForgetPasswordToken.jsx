@@ -22,8 +22,8 @@ const NewPassword = ({ token }) => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             token,
-            password: passwordRef.current.value,
-          }),
+            password: passwordRef.current.value
+          })
         });
         setStatus('success');
       } catch (e) {
@@ -38,41 +38,32 @@ const NewPassword = ({ token }) => {
       <h1 className={styles.title}>Reset Password</h1>
       {status === 'success' ? (
         <>
-          <p className={styles.subtitle}>
-            Your password has been updated successfully.
-          </p>
+          <p className={styles.subtitle}>Your password has been updated successfully.</p>
         </>
       ) : (
         <>
-          <p className={styles.subtitle}>
-            Enter a new password for your account
-          </p>
+          <p className={styles.subtitle}>Enter a new password for your account</p>
           <Spacer size={1} />
           <form onSubmit={onSubmit}>
             <Input
               ref={passwordRef}
-              htmlType="password"
-              autoComplete="new-password"
-              placeholder="New Password"
-              ariaLabel="New Password"
-              size="large"
+              htmlType='password'
+              autoComplete='new-password'
+              placeholder='New Password'
+              ariaLabel='New Password'
+              size='large'
               required
             />
-            <Spacer size={0.5} axis="vertical" />
-            <Button
-              htmlType="submit"
-              className={styles.submit}
-              type="success"
-              size="large"
-            >
+            <Spacer size={0.5} axis='vertical' />
+            <Button htmlType='submit' className={styles.submit} type='success' size='large'>
               Reset Password
             </Button>
           </form>
         </>
       )}
-      <Spacer size={0.25} axis="vertical" />
-      <Link href="/login" passHref>
-        <ButtonLink type="success" size="large" variant="ghost">
+      <Spacer size={0.25} axis='vertical' />
+      <Link href='/login' passHref legacyBehavior>
+        <ButtonLink type='success' size='large' variant='ghost'>
           Return to login
         </ButtonLink>
       </Link>
@@ -85,12 +76,11 @@ const BadLink = () => {
     <div className={styles.main}>
       <h1 className={styles.title}>Invalid Link</h1>
       <p className={styles.subtitle}>
-        It looks like you may have clicked on an invalid link. Please close this
-        window and try again.
+        It looks like you may have clicked on an invalid link. Please close this window and try again.
       </p>
       <Spacer size={1} />
-      <Link href="/login" passHref>
-        <ButtonLink type="success" size="large" variant="ghost">
+      <Link href='/login' passHref legacyBehavior>
+        <ButtonLink type='success' size='large' variant='ghost'>
           Return to login
         </ButtonLink>
       </Link>
@@ -99,11 +89,7 @@ const BadLink = () => {
 };
 
 const ForgetPasswordToken = ({ valid, token }) => {
-  return (
-    <Wrapper className={styles.root}>
-      {valid ? <NewPassword token={token} /> : <BadLink />}
-    </Wrapper>
-  );
+  return <Wrapper className={styles.root}>{valid ? <NewPassword token={token} /> : <BadLink />}</Wrapper>;
 };
 
 export default ForgetPasswordToken;

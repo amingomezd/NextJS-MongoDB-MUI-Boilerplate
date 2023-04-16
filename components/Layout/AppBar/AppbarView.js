@@ -1,89 +1,17 @@
 import React, { useCallback, useState } from 'react';
-import { ThemeSwitcher } from '@/components/ThemeSwitcher';
-import { fetcher } from '@/lib/fetch';
-import { useCurrentUser } from '@/lib/user';
-import Link from 'next/link';
-import toast from 'react-hot-toast';
-import {
-  AppBar,
-  Avatar,
-  Box,
-  Button,
-  Container,
-  IconButton,
-  Menu,
-  MenuItem,
-  Toolbar,
-  Tooltip,
-  Typography
-} from '@mui/material';
+import { AppBar, IconButton, Menu, MenuItem, Toolbar, Tooltip } from '@mui/material';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useCurrentUser } from '@/lib/user';
+import { fetcher } from '@/lib/fetch';
 import AdbIcon from '@mui/icons-material/Adb';
+import toast from 'react-hot-toast';
 
-const UserMenu = ({ user, mutate }) => {
-  const [anchorElUser, setAnchorElUser] = useState(null);
-
-  const onSignOut = useCallback(async () => {
-    try {
-      await fetcher('/api/auth', {
-        method: 'DELETE'
-      });
-      toast.success('You have been signed out');
-      mutate({ user: null });
-    } catch (e) {
-      toast.error(e.message);
-    }
-  }, [mutate]);
-
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
-  return (
-    <Box sx={{ flexGrow: 0 }}>
-      <Tooltip title='Open settings'>
-        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar src='/images/default_user.jpg' size={40} />
-        </IconButton>
-      </Tooltip>
-      <Menu
-        sx={{ mt: '45px' }}
-        id='menu-appbar'
-        anchorEl={anchorElUser}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
-        }}
-        open={Boolean(anchorElUser)}
-        onClose={handleCloseUserMenu}
-      >
-        <MenuItem onClick={handleCloseUserMenu} component={Link} href={`/user/${user.username}`}>
-          Profile
-        </MenuItem>
-        <MenuItem onClick={handleCloseUserMenu} component={Link} href='/settings'>
-          Settings
-        </MenuItem>
-        <MenuItem>
-          <ThemeSwitcher />
-        </MenuItem>
-        <MenuItem onClick={onSignOut} component={Link} href={`/user/${user.username}`}>
-          Sign out
-        </MenuItem>
-      </Menu>
-    </Box>
-  );
-};
-
-const Nav = () => {
+const AppbarView = () => {
   const { data: { user } = {}, mutate } = useCurrentUser();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -261,4 +189,4 @@ const Nav = () => {
   // );
 };
 
-export default Nav;
+export default AppbarView;

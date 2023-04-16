@@ -22,8 +22,8 @@ const ForgetPasswordIndex = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          email: emailRef.current.value,
-        }),
+          email: emailRef.current.value
+        })
       });
       setEmail(emailRef.current.value);
       setStatus('success');
@@ -41,7 +41,7 @@ const ForgetPasswordIndex = () => {
             <h1 className={styles.title}>Check your inbox</h1>
             <p className={styles.subtitle}>
               An email has been sent{' '}
-              <Text as="span" color="link">
+              <Text as='span' color='link'>
                 {email}
               </Text>
               . Please follow the link in that email to reset your password.
@@ -51,26 +51,26 @@ const ForgetPasswordIndex = () => {
           <>
             <h1 className={styles.title}>Forget Password</h1>
             <p className={styles.subtitle}>
-              Enter the email address associated with your account, and
-              we&apos;ll send you a link to reset your password.
+              Enter the email address associated with your account, and we&apos;ll send you a link to reset your
+              password.
             </p>
             <Spacer size={1} />
             <form onSubmit={onSubmit}>
               <Input
                 ref={emailRef}
-                htmlType="email"
-                autoComplete="email"
-                placeholder="Email Address"
-                ariaLabel="Email Address"
-                size="large"
+                htmlType='email'
+                autoComplete='email'
+                placeholder='Email Address'
+                ariaLabel='Email Address'
+                size='large'
                 required
               />
-              <Spacer size={0.5} axis="vertical" />
+              <Spacer size={0.5} axis='vertical' />
               <Button
-                htmlType="submit"
+                htmlType='submit'
                 className={styles.submit}
-                type="success"
-                size="large"
+                type='success'
+                size='large'
                 loading={status === 'loading'}
               >
                 Continue
@@ -78,9 +78,9 @@ const ForgetPasswordIndex = () => {
             </form>
           </>
         )}
-        <Spacer size={0.25} axis="vertical" />
-        <Link href="/login" passHref>
-          <ButtonLink type="success" size="large" variant="ghost">
+        <Spacer size={0.25} axis='vertical' />
+        <Link href='/login' passHref legacyBehavior>
+          <ButtonLink type='success' size='large' variant='ghost'>
             Return to login
           </ButtonLink>
         </Link>

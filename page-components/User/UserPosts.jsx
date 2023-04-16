@@ -9,36 +9,24 @@ import styles from './UserPosts.module.css';
 
 const UserPosts = ({ user }) => {
   const { data, size, setSize, isLoadingMore, isReachingEnd } = usePostPages({
-    creatorId: user._id,
+    creatorId: user._id
   });
-  const posts = data
-    ? data.reduce((acc, val) => [...acc, ...val.posts], [])
-    : [];
+  const posts = data ? data.reduce((acc, val) => [...acc, ...val.posts], []) : [];
 
   return (
     <div className={styles.root}>
-      <Spacer axis="vertical" size={1} />
+      <Spacer axis='vertical' size={1} />
       <Wrapper>
         {posts.map((post) => (
-          <Link
-            key={post._id}
-            href={`/user/${post.creator.username}/post/${post._id}`}
-          >
-            <a className={styles.wrap}>
-              <Post className={styles.post} post={post} />
-            </a>
+          <Link key={post._id} href={`/user/${post.creator.username}/post/${post._id}`} className={styles.wrap}>
+            <Post className={styles.post} post={post} />
           </Link>
         ))}
-        <Container justifyContent="center">
+        <Container justifyContent='center'>
           {isReachingEnd ? (
-            <Text color="secondary">No more posts are found</Text>
+            <Text color='secondary'>No more posts are found</Text>
           ) : (
-            <Button
-              variant="ghost"
-              type="success"
-              loading={isLoadingMore}
-              onClick={() => setSize(size + 1)}
-            >
+            <Button variant='ghost' type='success' loading={isLoadingMore} onClick={() => setSize(size + 1)}>
               Load more
             </Button>
           )}

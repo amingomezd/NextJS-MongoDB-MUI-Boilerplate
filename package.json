@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 -s ./public",
     "build-storybook": "build-storybook"
   },
   "repository": {
@@ -26,6 +26,7 @@
     "@emotion/styled": "^11.10.6",
     "@lukeed/ms": "^2.0.0",
     "@mui/icons-material": "^5.11.16",
+    "@mui/lab": "^5.0.0-alpha.126",
     "@mui/material": "^5.12.0",
     "ajv": "^8.11.0",
     "bcryptjs": "^2.4.3",
@@ -57,11 +58,11 @@
     "@storybook/builder-webpack5": "^6.5.9",
     "@storybook/manager-webpack5": "^6.5.9",
     "@storybook/react": "^6.5.9",
-    "storybook": "^6.5.9",
     "eslint": "^8.38.0",
     "eslint-config-next": "^13.3.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.8.7"
+    "prettier": "^2.8.7",
+    "storybook": "^6.5.9"
   }
 }

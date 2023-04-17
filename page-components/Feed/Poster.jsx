@@ -26,7 +26,7 @@ const PosterInner = ({ user }) => {
         await fetcher('/api/posts', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ content: contentRef.current.value }),
+          body: JSON.stringify({ content: contentRef.current.value })
         });
         toast.success('You have posted successfully');
         contentRef.current.value = '';
@@ -51,7 +51,7 @@ const PosterInner = ({ user }) => {
           placeholder={`What's on your mind, ${user.name}?`}
           ariaLabel={`What's on your mind, ${user.name}?`}
         />
-        <Button type="success" loading={isLoading}>
+        <Button type='success' loading={isLoading}>
           Post
         </Button>
       </Container>
@@ -72,10 +72,10 @@ const Poster = () => {
         ) : data?.user ? (
           <PosterInner user={data.user} />
         ) : (
-          <Text color="secondary">
+          <Text color='secondary'>
             Please{' '}
-            <Link href="/login" passHref>
-              <TextLink color="link" variant="highlight">
+            <Link href='/login' passHref>
+              <TextLink color='link' variant='highlight'>
                 sign in
               </TextLink>
             </Link>{' '}

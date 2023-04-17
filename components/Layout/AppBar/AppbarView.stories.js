@@ -5,6 +5,17 @@ export default {
   title: 'Components / Appbar',
   component: AppbarView
 };
+
+const pages = { login: { name: 'Login', url: '/login' }, signUp: { name: 'Sign Up', url: '/sign-up' } };
+
+const userSettings = [
+  { name: 'Profile', url: '/#' },
+  { name: 'Settings', url: '/#' }
+];
 export const Default = () => {
-  return <AppbarView />;
+  return <AppbarView pages={pages} />;
+};
+
+export const loggedIn = () => {
+  return <AppbarView pages={pages} userSettings={userSettings} user={true} />;
 };

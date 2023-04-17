@@ -26,7 +26,7 @@ const CommenterInner = ({ user, post }) => {
         await fetcher(`/api/posts/${post._id}/comments`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ content: contentRef.current.value }),
+          body: JSON.stringify({ content: contentRef.current.value })
         });
         toast.success('You have added a comment');
         contentRef.current.value = '';
@@ -45,13 +45,8 @@ const CommenterInner = ({ user, post }) => {
     <form onSubmit={onSubmit}>
       <Container className={styles.poster}>
         <Avatar size={40} username={user.username} url={user.profilePicture} />
-        <Input
-          ref={contentRef}
-          className={styles.input}
-          placeholder="Add your comment"
-          ariaLabel="Add your comment"
-        />
-        <Button type="success" loading={isLoading}>
+        <Input ref={contentRef} className={styles.input} placeholder='Add your comment' ariaLabel='Add your comment' />
+        <Button type='success' loading={isLoading}>
           Comment
         </Button>
       </Container>
@@ -68,7 +63,7 @@ const Commenter = ({ post }) => {
       <h3 className={styles.heading}>
         Replying to{' '}
         <Link href={`/user/${post.creator.username}`} passHref>
-          <TextLink color="link">@{post.creator.username}</TextLink>
+          <TextLink color='link'>@{post.creator.username}</TextLink>
         </Link>
       </h3>
       {loading ? (
@@ -76,10 +71,10 @@ const Commenter = ({ post }) => {
       ) : data?.user ? (
         <CommenterInner post={post} user={data.user} />
       ) : (
-        <Text color="secondary">
+        <Text color='secondary'>
           Please{' '}
-          <Link href="/login" passHref>
-            <TextLink color="link" variant="highlight">
+          <Link href='/login' passHref>
+            <TextLink color='link' variant='highlight'>
               sign in
             </TextLink>
           </Link>{' '}

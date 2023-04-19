@@ -8,8 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "repository": {
     "type": "git",
@@ -53,16 +53,20 @@
     "validator": "^13.7.0"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^6.5.9",
-    "@storybook/addons": "^6.5.9",
-    "@storybook/builder-webpack5": "^6.5.9",
-    "@storybook/manager-webpack5": "^6.5.9",
-    "@storybook/react": "^6.5.9",
+    "@babel/preset-env": "^7.21.4",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.21.4",
+    "@storybook/addon-essentials": "^7.0.6",
+    "@storybook/addon-mdx-gfm": "^7.0.6",
+    "@storybook/addons": "^7.0.6",
+    "@storybook/react": "^7.0.6",
+    "@storybook/react-webpack5": "^7.0.6",
     "eslint": "^8.38.0",
     "eslint-config-next": "^13.3.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-storybook": "^0.6.11",
     "prettier": "^2.8.7",
-    "storybook": "^6.5.9"
+    "storybook": "^7.0.6"
   }
 }

@@ -9,6 +9,7 @@ export const styles = ({ noPadding }) => {
     },
     children: {
       paddingTop: !noPadding && '40px',
+      paddingBottom: !noPadding && '40px',
       display: 'flex',
       flex: 1,
       flexDirection: 'column',

@@ -1,6 +1,6 @@
-import { Avatar } from '@/components/Avatar';
 import { Card, CardActions, CardContent, CardHeader, IconButton, Stack, TextField, Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
+import Avatar from '@mui/material/Avatar';
 
 const AboutYouView = ({
   user,
@@ -31,7 +31,11 @@ const AboutYouView = ({
             ref={profilePictureRef}
             onChange={onAvatarChange}
           />
-          <Avatar src={avatarHref || '/images/default_user.jpg'} size='100px' alt={user.username} />
+          <Avatar
+            src={avatarHref || '/images/default_user.jpg'}
+            alt={user.username}
+            sx={{ width: '100px', height: '100px' }}
+          />
         </IconButton>
       </CardContent>
       <CardActions>

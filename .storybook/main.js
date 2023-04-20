@@ -1,6 +1,6 @@
 const path = require("path");
 module.exports = {
-  addons: ['@storybook/addon-essentials', '@storybook/addon-mdx-gfm'],
+  addons: ['@storybook/addon-essentials', '@storybook/addon-mdx-gfm', 'storybook-addon-swc'],
   framework: {
     name: '@storybook/react-webpack5',
     options: {}

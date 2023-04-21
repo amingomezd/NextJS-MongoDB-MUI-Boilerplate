@@ -6,7 +6,7 @@ const PageTitleView = ({ title, subtitle }) => {
   return (
     <Box
       sx={{
-        backgroundImage: 'linear-gradient(to right top, #60a5fa, #5697fb, #5388fa, #5878f7, #6366f1)',
+        backgroundColor: (theme) => theme.palette.primary.main,
         color: 'white',
         py: '20px',
         width: '100%'

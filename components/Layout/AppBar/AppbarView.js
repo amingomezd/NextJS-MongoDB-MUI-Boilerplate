@@ -29,7 +29,7 @@ const AppbarView = ({ pages, userSettings, user, onSignOut }) => {
   };
 
   return (
-    <AppBar position='static' sx={{ backgroundColor: 'white' }}>
+    <AppBar position='static' sx={{ backgroundColor: 'white', zIndex: 2 }}>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           {/* Desktop Logo */}
@@ -97,7 +97,7 @@ const AppbarView = ({ pages, userSettings, user, onSignOut }) => {
             <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>
               <Tooltip title='Open settings'>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar src='/images/default_user.jpg' />
+                  <Avatar src={user.profilePicture} />
                 </IconButton>
               </Tooltip>
               <Menu

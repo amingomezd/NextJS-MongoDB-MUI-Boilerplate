@@ -17,25 +17,10 @@ const LoginPageView = ({ isLoading, onSubmit, emailRef, passwordRef }) => {
           sx={{ margin: '0 auto' }}
         >
           <Stack spacing={1}>
-            <TextField
-              label='Email Address'
-              inputRef={emailRef}
-              type='email'
-              aria-autocomplete='both'
-              aria-label='Email Address'
-              required
-              sx={{ width: '100%' }}
-            />
-            <TextField
-              label='Password'
-              inputRef={passwordRef}
-              type='password'
-              aria-autocomplete='both'
-              aria-label='Password'
-              required
-            />
+            <TextField label='Email Address' inputRef={emailRef} type='email' required sx={{ width: '100%' }} />
+            <TextField label='Password' inputRef={passwordRef} type='password' required />
           </Stack>
-          <LoadingButton variant='contained' loading={isLoading}>
+          <LoadingButton variant='contained' loading={isLoading} type='submit'>
             Log in
           </LoadingButton>
           <Link href='/index.page' style={{ textDecoration: 'none', textAlign: 'center' }}>

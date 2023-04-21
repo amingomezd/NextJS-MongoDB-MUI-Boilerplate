@@ -19,7 +19,7 @@ const AboutYouView = ({
       <CardContent component={Stack} spacing={2}>
         <TextField label='Your Username' inputRef={usernameRef} aria-label='Username' />
         <TextField label='Your Name' inputRef={nameRef} aria-label='Name' />
-        <TextField label='Your Bio' inputRef={bioRef} multiline rows={2} maxRows={4} />
+        <TextField label='Your Bio' inputRef={bioRef} multiline rows={4} />
 
         <Typography variant='h6'>Your Avatar</Typography>
         <IconButton sx={{ width: 'fit-content' }} component='label'>
@@ -31,11 +31,7 @@ const AboutYouView = ({
             ref={profilePictureRef}
             onChange={onAvatarChange}
           />
-          <Avatar
-            src={avatarHref || '/images/default_user.jpg'}
-            alt={user.username}
-            sx={{ width: '100px', height: '100px' }}
-          />
+          <Avatar src={avatarHref} alt={user.username} sx={{ width: '100px', height: '100px' }} />
         </IconButton>
       </CardContent>
       <CardActions>

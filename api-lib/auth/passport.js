@@ -17,15 +17,12 @@ passport.deserializeUser((req, id, done) => {
 });
 
 passport.use(
-  new LocalStrategy(
-    { usernameField: 'email', passReqToCallback: true },
-    async (req, email, password, done) => {
-      const db = await getMongoDb();
-      const user = await findUserWithEmailAndPassword(db, email, password);
-      if (user) done(null, user);
-      else done(null, false, { message: 'Email or password is incorrect' });
-    }
-  )
+  new LocalStrategy({ usernameField: 'email', passReqToCallback: true }, async (req, email, password, done) => {
+    const db = await getMongoDb();
+    const user = await findUserWithEmailAndPassword(db, email, password);
+    if (user) done(null, user);
+    else done(null, false, { message: 'Email or password is incorrect' });
+  })
 );
 
 export default passport;

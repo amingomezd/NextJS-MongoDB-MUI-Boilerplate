@@ -3,8 +3,10 @@ import AppbarView from './AppbarView';
 import { useCurrentUser } from '@/lib/user';
 import { fetcher } from '@/lib/fetch';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
 
 const Appbar = () => {
+  const router = useRouter();
   const { data: { user } = {}, mutate } = useCurrentUser();
   const pages = { login: { name: 'Login', url: '/login' }, signUp: { name: 'Sign Up', url: '/sign-up' } };
 
@@ -20,6 +22,7 @@ const Appbar = () => {
       });
       toast.success('You have been signed out');
       mutate({ user: null });
+      router.replace('/login');
     } catch (e) {
       toast.error(e.message);
     }

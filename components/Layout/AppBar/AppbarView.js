@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { AppBar, Divider, IconButton, Menu, MenuItem, Stack, Toolbar, Tooltip } from '@mui/material';
+import { AppBar, Chip, Divider, IconButton, Menu, MenuItem, Stack, Toolbar, Tooltip } from '@mui/material';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import MenuIcon from '@mui/icons-material/Menu';
-import AdbIcon from '@mui/icons-material/Adb';
 import Link from 'next/link';
 
 const AppbarView = ({ pages, userSettings, user, onSignOut }) => {
@@ -33,22 +32,17 @@ const AppbarView = ({ pages, userSettings, user, onSignOut }) => {
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           {/* Desktop Logo */}
-          <AdbIcon sx={{ color: 'black', display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-              textDecoration: 'none'
-            }}
-            variant='h6'
+          <Chip
+            label='Awesome Site name'
+            variant='outlined'
             component={Link}
             href='/'
-          >
-            Site name
-          </Typography>
+            sx={{ display: { xs: 'none', md: 'flex' } }}
+          />
 
           {/* Mobile Hamburger Menu*/}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton size='large' onClick={handleOpenNavMenu} color='inherit'>
+            <IconButton size='large' onClick={handleOpenNavMenu} color='primary'>
               <MenuIcon />
             </IconButton>
             <Menu
@@ -69,28 +63,36 @@ const AppbarView = ({ pages, userSettings, user, onSignOut }) => {
                 display: { xs: 'block', md: 'none' }
               }}
             >
-              <MenuItem key={pages.login.name} onClick={handleCloseNavMenu} component={Link} href={pages.login.url}>
-                <Typography textAlign='center'>{pages.login.name}</Typography>
-              </MenuItem>
-              <MenuItem key={pages.signUp.name} onClick={handleCloseNavMenu} component={Link} href={pages.signUp.url}>
-                <Typography textAlign='center'>{pages.signUp.name}</Typography>
-              </MenuItem>
+              {user ? (
+                <>
+                  <MenuItem>
+                    <Typography textAlign='center'>Athenticated page 1</Typography>
+                  </MenuItem>
+                  <MenuItem>
+                    <Typography textAlign='center'>Athenticated page 2</Typography>
+                  </MenuItem>
+                </>
+              ) : (
+                <>
+                  <MenuItem onClick={handleCloseNavMenu} component={Link} href={pages.login.url}>
+                    <Typography textAlign='center'>{pages.login.name}</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleCloseNavMenu} component={Link} href={pages.signUp.url}>
+                    <Typography textAlign='center'>{pages.signUp.name}</Typography>
+                  </MenuItem>
+                </>
+              )}
             </Menu>
           </Box>
 
           {/* Mobile Logo */}
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant='h5'
+          <Chip
+            label='Awesome Site name'
+            variant='outlined'
             component={Link}
             href='/'
-            sx={{
-              display: { xs: 'flex', md: 'none' },
-              textDecoration: 'none'
-            }}
-          >
-            Site name
-          </Typography>
+            sx={{ display: { xs: 'flex', md: 'none' } }}
+          />
 
           {/* User menu OR Desktop Buttons*/}
           {user ? (

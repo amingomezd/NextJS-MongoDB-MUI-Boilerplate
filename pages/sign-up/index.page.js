@@ -19,7 +19,6 @@ const SignupPage = () => {
 
   const onSubmit = useCallback(
     async (e) => {
-      console.log(emailRef.current.value);
       e.preventDefault();
       try {
         setIsLoading(true);

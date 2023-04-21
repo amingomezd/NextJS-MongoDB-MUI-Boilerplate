@@ -23,13 +23,13 @@ const LoginPageView = ({ isLoading, onSubmit, emailRef, passwordRef }) => {
           <LoadingButton variant='contained' loading={isLoading} type='submit'>
             Log in
           </LoadingButton>
-          <Link href='/index.page' style={{ textDecoration: 'none', textAlign: 'center' }}>
+          <Link href='/forget-password' style={{ textDecoration: 'none', textAlign: 'center' }}>
             Forget password?
           </Link>
         </Stack>
         <Stack spacing={2} height='200px' justifyContent='flex-end'>
           <Divider />
-          <Link href='/sign-up/index.page' style={{ textDecoration: 'none', textAlign: 'center' }}>
+          <Link href='/sign-up' style={{ textDecoration: 'none', textAlign: 'center' }}>
             {"Don't have an account? Sign Up"}
           </Link>
         </Stack>

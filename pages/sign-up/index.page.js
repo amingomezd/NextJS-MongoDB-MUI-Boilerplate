@@ -35,7 +35,7 @@ const SignupPage = () => {
         });
         mutate({ user: response.user }, false);
         toast.success('Your account has been created');
-        router.replace('/feed');
+        router.replace('/settings');
       } catch (e) {
         toast.error(e.message);
       } finally {

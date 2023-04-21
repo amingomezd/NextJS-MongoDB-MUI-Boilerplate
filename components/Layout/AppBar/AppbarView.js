@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { AppBar, Divider, IconButton, Menu, MenuItem, Stack, Toolbar, Tooltip } from '@mui/material';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -6,12 +6,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import MenuIcon from '@mui/icons-material/Menu';
-import { fetcher } from '@/lib/fetch';
 import AdbIcon from '@mui/icons-material/Adb';
-import toast from 'react-hot-toast';
 import Link from 'next/link';
 
-const AppbarView = ({ pages, userSettings, user, mutate }) => {
+const AppbarView = ({ pages, userSettings, user, onSignOut }) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -29,18 +27,6 @@ const AppbarView = ({ pages, userSettings, user, mutate }) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-  const onSignOut = useCallback(async () => {
-    try {
-      await fetcher('/api/auth', {
-        method: 'DELETE'
-      });
-      toast.success('You have been signed out');
-      mutate({ user: null });
-    } catch (e) {
-      toast.error(e.message);
-    }
-  }, [mutate]);
 
   return (
     <AppBar position='static' sx={{ backgroundColor: 'white' }}>

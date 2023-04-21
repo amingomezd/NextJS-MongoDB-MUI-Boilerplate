@@ -63,7 +63,7 @@ const SignUpPageView = ({ isLoading, onSubmit, nameRef, emailRef, passwordRef, u
         </Stack>
         <Stack spacing={2} height='100px' justifyContent='flex-end'>
           <Divider />
-          <Link href='/pages/login' style={{ textDecoration: 'none', textAlign: 'center' }}>
+          <Link href='/pages/index.page.js' style={{ textDecoration: 'none', textAlign: 'center' }}>
             Already have an account? Log in
           </Link>
         </Stack>

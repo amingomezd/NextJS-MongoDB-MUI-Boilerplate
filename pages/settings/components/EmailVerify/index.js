@@ -5,6 +5,7 @@ import EmailVerifyView from './EmailVerifyView';
 
 const EmailVerify = ({ user }) => {
   const [status, setStatus] = useState();
+
   const verify = useCallback(async () => {
     try {
       setStatus('loading');

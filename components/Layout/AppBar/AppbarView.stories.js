@@ -16,6 +16,6 @@ export const Default = () => {
   return <AppbarView pages={pages} />;
 };
 
-export const loggedIn = () => {
+export const LoggedIn = () => {
   return <AppbarView pages={pages} userSettings={userSettings} user={true} />;
 };

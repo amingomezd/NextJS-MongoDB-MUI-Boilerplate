@@ -13,10 +13,10 @@ handler.put(
     type: 'object',
     properties: {
       oldPassword: ValidateProps.user.password,
-      newPassword: ValidateProps.user.password,
+      newPassword: ValidateProps.user.password
     },
     required: ['oldPassword', 'newPassword'],
-    additionalProperties: false,
+    additionalProperties: false
   }),
   async (req, res) => {
     if (!req.user) {
@@ -28,16 +28,11 @@ handler.put(
 
     const { oldPassword, newPassword } = req.body;
 
-    const success = await updateUserPasswordByOldPassword(
-      db,
-      req.user._id,
-      oldPassword,
-      newPassword
-    );
+    const success = await updateUserPasswordByOldPassword(db, req.user._id, oldPassword, newPassword);
 
     if (!success) {
       res.status(401).json({
-        error: { message: 'The old password you entered is incorrect.' },
+        error: { message: 'The old password you entered is incorrect.' }
       });
       return;
     }

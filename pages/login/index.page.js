@@ -38,7 +38,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (isValidating) return;
-    if (user) router.replace('/feed');
+    if (user) router.replace('/settings');
   }, [user, router, isValidating]);
 
   return <LoginPageView isLoading={isLoading} onSubmit={onSubmit} emailRef={emailRef} passwordRef={passwordRef} />;

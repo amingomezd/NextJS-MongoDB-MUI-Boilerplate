@@ -46,7 +46,7 @@ const ForgetPasswordPageView = ({ status, email, onSubmit, emailRef }) => {
           </Box>
         )}
         <Box textAlign='center' mt={3}>
-          <Link href='/login' style={{ textDecoration: 'none', textAlign: 'center' }}>
+          <Link href='/index.page' style={{ textDecoration: 'none', textAlign: 'center' }}>
             Return to login
           </Link>
         </Box>

@@ -54,7 +54,7 @@ Storybook v7
 
 <div align="center">
   
-<sup>Have any features that interest you, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).<sup>
+<sup>Have any features that interest you, [make an issue](https://github.com/amingomezd/NextJS-MongoDB-MUI-Boilerplate/issues). Would like to work on a feature, [make a PR](https://github.com/amingomezd/NextJS-MongoDB-MUI-Boilerplate/pulls).<sup>
   
 </div>
 

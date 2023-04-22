@@ -58,7 +58,16 @@ const AppbarView = ({ authLinks, userSettings, authenticatedLinks, user, onSignO
     </>
   );
 
-  const logo = <Chip label='Awesome Site name' variant='outlined' component={Link} href='/' />;
+  const logo = (
+    <Chip
+      label='Awesome Site name'
+      variant='outlined'
+      component={Link}
+      href='/'
+      color='primary'
+      sx={{ fontSize: '20px' }}
+    />
+  );
 
   const userAvatarMenu = (
     <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>

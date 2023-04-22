@@ -31,8 +31,8 @@ const IndexPage = () => {
           </Typography>
         </Stack>
         <Stack direction='row' my={5} justifyContent='center' spacing={2}>
-          <Button variant='contained'>View more</Button>
-          <Button variant='outlined'>Sign up</Button>
+          <Button variant='contained'>Button 1</Button>
+          <Button variant='outlined'>Button 2</Button>
         </Stack>
         <Typography variant='subtitle2' textAlign='center'>
           this is where you put a short description of your site.

@@ -2,6 +2,7 @@ import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Toaster } from 'react-hot-toast';
+import { RouterContext } from "next/dist/shared/lib/router-context";
 
 export const parameters = {
   viewport: {
@@ -12,7 +13,15 @@ export const parameters = {
     },
     defaultViewport: 'desktop'
   },
-  layout: 'fullscreen'
+  layout: 'fullscreen',
+  nextRouter: {
+    Provider: RouterContext.Provider,
+    path: '/',
+    asPath: '/',
+    query: {},
+    push() {},
+    replace() {},
+  },
 };
 
 const theme = createTheme();

@@ -52,7 +52,6 @@
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.6",
-    "@storybook/addon-mdx-gfm": "^7.0.6",
     "@storybook/addons": "^7.0.6",
     "@storybook/react": "^7.0.6",
     "@storybook/react-webpack5": "^7.0.6",
@@ -64,6 +63,7 @@
     "eslint-plugin-storybook": "^0.6.11",
     "prettier": "^2.8.7",
     "storybook": "^7.0.6",
-    "storybook-addon-swc": "^1.2.0"
+    "storybook-addon-swc": "^1.2.0",
+    "storybook-addon-next-router": "^4.0.2"
   }
 }

@@ -6,16 +6,34 @@ export default {
   component: AppbarView
 };
 
-const pages = { login: { name: 'Login', url: '/login' }, signUp: { name: 'Sign Up', url: '/sign-up' } };
-
 const userSettings = [
-  { name: 'Profile', url: '/#' },
-  { name: 'Settings', url: '/#' }
+  { name: 'Profile', url: '/' },
+  { name: 'Settings', url: '/settings' }
+];
+
+const authenticatedLinks = [
+  { name: 'Authenticated Page1', url: '/' },
+  { name: 'Authenticated Page2', url: '/' },
+  { name: 'Authenticated Page3', url: '/' }
+];
+
+const authLinks = [
+  { name: 'Login', url: '/login', variant: 'outlined' },
+  { name: 'Sign Up', url: '/sign-up', variant: 'contained' }
 ];
 export const Default = () => {
-  return <AppbarView pages={pages} />;
+  return (
+    <AppbarView
+      authLinks={authLinks}
+      authenticatedLinks={authenticatedLinks}
+      userSettings={userSettings}
+      user={false}
+    />
+  );
 };
 
 export const LoggedIn = () => {
-  return <AppbarView pages={pages} userSettings={userSettings} user={true} />;
+  return (
+    <AppbarView authLinks={authLinks} authenticatedLinks={authenticatedLinks} userSettings={userSettings} user={true} />
+  );
 };

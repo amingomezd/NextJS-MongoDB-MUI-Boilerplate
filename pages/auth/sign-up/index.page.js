@@ -22,7 +22,7 @@ const SignupPage = () => {
       e.preventDefault();
       try {
         setIsLoading(true);
-        const response = await fetcher('/api/users', {
+        const response = await fetcher('/api/user', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

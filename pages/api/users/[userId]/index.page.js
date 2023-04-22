@@ -1,7 +1,7 @@
-import { findUserById } from '@/api-lib/db';
-import { getMongoDb } from '@/api-lib/mongodb';
-import { ncOpts } from '@/api-lib/nc';
+import { getMongoDb } from '@/src/services/mongodb';
+import { ncOpts } from '@/src/config/nc';
 import nc from 'next-connect';
+import { findUserById } from '@/src/services/user';
 
 const handler = nc(ncOpts);
 

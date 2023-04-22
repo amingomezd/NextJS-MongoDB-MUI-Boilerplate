@@ -1,5 +1,5 @@
-import { findUserByUsername } from '@/api-lib/db';
-import { getMongoDb } from '@/api-lib/mongodb';
+import { findUserByUsername } from '@/src/services/user';
+import { getMongoDb } from '@/src/services/mongodb';
 import UserPageView from './UserPageView';
 
 export default function UserPage({ user }) {

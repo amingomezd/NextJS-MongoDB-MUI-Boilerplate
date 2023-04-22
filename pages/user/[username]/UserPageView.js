@@ -1,5 +1,5 @@
-import PageLayout from '@/components/Layout/PageLayout';
-import PageContentBox from '@/components/Layout/PageContentBox';
+import PageLayout from '../../../src/components/Layout/PageLayout';
+import PageContentBox from '../../../src/components/Layout/PageContentBox';
 import Avatar from '@mui/material/Avatar';
 import { Paper, Stack, Typography } from '@mui/material';
 
@@ -8,11 +8,7 @@ const UserPageView = ({ user }) => {
     <PageLayout title={`${user.name} (@${user.username})`}>
       <PageContentBox>
         <Stack component={Paper} elevation={20} p={5} spacing={1} alignItems='center'>
-          <Avatar
-            sx={{ width: '170px', height: '170px' }}
-            alt={user.username}
-            src={user.profilePicture || '/images/default_user.jpg'}
-          />
+          <Avatar sx={{ width: '170px', height: '170px' }} alt={user.username} src={user.profilePicture} />
           <Typography variant='h4' fontWeight={700}>
             {user.name}
           </Typography>

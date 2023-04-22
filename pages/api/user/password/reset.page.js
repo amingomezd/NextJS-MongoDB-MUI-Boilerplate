@@ -1,11 +1,12 @@
-import { ValidateProps } from '@/api-lib/constants';
-import { createToken, findAndDeleteTokenByIdAndType, findUserByEmail, UNSAFE_updateUserPassword } from '@/api-lib/db';
-import { CONFIG as MAIL_CONFIG, sendMail } from '@/api-lib/mail';
-import { validateBody } from '@/api-lib/middlewares';
-import { getMongoDb } from '@/api-lib/mongodb';
-import { ncOpts } from '@/api-lib/nc';
+import { ValidateProps } from '@/src/config/constants';
+import { CONFIG as MAIL_CONFIG, sendMail } from '@/src/services/mail';
+import { validateBody } from 'middlewares';
+import { getMongoDb } from '@/src/services/mongodb';
+import { ncOpts } from '@/src/config/nc';
 import nc from 'next-connect';
 import normalizeEmail from 'validator/lib/normalizeEmail';
+import { findUserByEmail, UNSAFE_updateUserPassword } from '@/src/services/user';
+import { createToken, findAndDeleteTokenByIdAndType } from '@/src/services/auth/token';
 
 const handler = nc(ncOpts);
 
@@ -43,7 +44,7 @@ handler.post(
       html: `
       <div>
         <p>Hello, ${user.name}</p>
-        <p>Please follow <a href='${process.env.WEB_URI}/forget-password/${token._id}'>this link</a> to reset your password.</p>
+        <p>Please follow <a href='${process.env.WEB_URI}/auth/forget-password/${token._id}'>this link</a> to reset your password.</p>
       </div>
       `
     });

@@ -1,8 +1,8 @@
-import { createToken } from '@/api-lib/db';
-import { CONFIG as MAIL_CONFIG, sendMail } from '@/api-lib/mail';
-import { auths } from '@/api-lib/middlewares';
-import { getMongoDb } from '@/api-lib/mongodb';
-import { ncOpts } from '@/api-lib/nc';
+import { createToken } from '@/src/services/auth/token';
+import { CONFIG as MAIL_CONFIG, sendMail } from '@/src/services/mail';
+import { auths } from 'middlewares';
+import { getMongoDb } from '@/src/services/mongodb';
+import { ncOpts } from '@/src/config/nc';
 import nc from 'next-connect';
 
 const handler = nc(ncOpts);

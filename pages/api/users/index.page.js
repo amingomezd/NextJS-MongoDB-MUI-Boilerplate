@@ -1,9 +1,9 @@
-import { ValidateProps } from '@/api-lib/constants';
-import { findUserByEmail, findUserByUsername, insertUser } from '@/api-lib/db';
-import { auths, validateBody } from '@/api-lib/middlewares';
-import { getMongoDb } from '@/api-lib/mongodb';
-import { ncOpts } from '@/api-lib/nc';
-import { slugUsername } from '@/lib/user';
+import { ValidateProps } from '@/src/config/constants';
+import { findUserByEmail, findUserByUsername, insertUser } from '@/src/services/user';
+import { auths, validateBody } from 'middlewares';
+import { getMongoDb } from '@/src/services/mongodb';
+import { ncOpts } from '@/src/config/nc';
+import { slugUsername } from '@/src/common/utils';
 import nc from 'next-connect';
 import isEmail from 'validator/lib/isEmail';
 import normalizeEmail from 'validator/lib/normalizeEmail';

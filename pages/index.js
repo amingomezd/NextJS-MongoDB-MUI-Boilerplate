@@ -2,7 +2,7 @@ import PageLayout from '../src/components/Layout/PageLayout';
 import PageContentBox from '../src/components/Layout/PageContentBox';
 import { Button, Stack, Typography } from '@mui/material';
 
-const IndexPage = () => {
+const Index = () => {
   return (
     <PageLayout noPadding>
       <PageContentBox>
@@ -42,4 +42,4 @@ const IndexPage = () => {
   );
 };
 
-export default IndexPage;
+export default Index;

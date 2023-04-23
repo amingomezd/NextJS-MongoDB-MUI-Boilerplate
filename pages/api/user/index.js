@@ -9,6 +9,7 @@ import multer from 'multer';
 import nc from 'next-connect';
 import normalizeEmail from 'validator/lib/normalizeEmail';
 import isEmail from 'validator/lib/isEmail';
+import { jsonParser } from '@/src/common/utils/bodyParser';
 
 const upload = multer({ dest: '/tmp' });
 const handler = nc(ncOpts);
@@ -26,17 +27,21 @@ if (process.env.CLOUDINARY_URL) {
 handler.use(...auths);
 
 handler.post(
-  validateBody({
-    type: 'object',
-    properties: {
-      username: ValidateProps.user.username,
-      name: ValidateProps.user.name,
-      password: ValidateProps.user.password,
-      email: ValidateProps.user.email
+  jsonParser,
+  validateBody(
+    {
+      type: 'object',
+      properties: {
+        username: ValidateProps.user.username,
+        name: ValidateProps.user.name,
+        password: ValidateProps.user.password,
+        email: ValidateProps.user.email
+      },
+      required: ['username', 'name', 'password', 'email'],
+      additionalProperties: false
     },
-    required: ['username', 'name', 'password', 'email'],
-    additionalProperties: false
-  }),
+    true
+  ),
   ...auths,
   async (req, res) => {
     const db = await getMongoDb();
@@ -130,7 +135,7 @@ handler.patch(
 
 export const config = {
   api: {
-    bodyParser: true
+    bodyParser: false
   }
 };
 

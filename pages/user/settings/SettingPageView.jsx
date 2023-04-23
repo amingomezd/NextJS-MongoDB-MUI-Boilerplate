@@ -1,8 +1,8 @@
 import AboutYou from './components/AboutYou';
 import EmailVerify from './components/EmailVerify';
 import Auth from './components/Auth';
-import PageContentBox from '../../../src/components/Layout/PageContentBox';
-import PageLayout from '../../../src/components/Layout/PageLayout';
+import PageContentBox from '@/src/components/Layout/PageContentBox';
+import PageLayout from '@/src/components/Layout/PageLayout';
 import { Stack } from '@mui/material';
 
 const SettingPageView = ({ data, mutate }) => {

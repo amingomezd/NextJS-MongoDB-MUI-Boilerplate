@@ -11,7 +11,7 @@ const Appbar = () => {
 
   const userSettings = [
     { name: 'Profile', url: `/user/${user?.username}` },
-    { name: 'Settings', url: '/auth/settings' }
+    { name: 'Settings', url: '/user/settings' }
   ];
 
   const authenticatedLinks = [

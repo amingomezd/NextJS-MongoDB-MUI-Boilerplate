@@ -8,7 +8,7 @@ export default {
 
 const userSettings = [
   { name: 'Profile', url: '/' },
-  { name: 'Settings', url: '/auth/settings' }
+  { name: 'Settings', url: '/user/settings' }
 ];
 
 const authenticatedLinks = [

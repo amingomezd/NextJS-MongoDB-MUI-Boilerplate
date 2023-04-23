@@ -6,9 +6,9 @@ This project was based in hoangvvo [Next.js MongoDB](https://github.com/hoangvvo
   
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Famingomezd%2FNextJS-MongoDB-MUI-Boilerplate&env=MONGODB_URI,NODEMAILER_CONFIG,WEB_URI,CLOUDINARY_URL&envDescription=MONGODB_URI%20and%20NODEMAILER_CONFIG%20are%20mandatory)
 
-An [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www.mongodb.com/) web application with Material UI as the design system, designed as an starting point of any web application. All pages and components has stories with storybook v7.
+An [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www.mongodb.com/) web application with [**Material UI**](https://mui.com/) as the design system WITH MINIMUM CUSTOM CSS, just bare-bones MUI with default theme and colors palette, designed as a starting point of any web application. All pages and components has stories with storybook v7.
 
-:rocket: [Check out the demo](https://next-js-mongo-db-mui-boilerplate.vercel.app/) :rocket:
+[ONLINE DEMO](https://next-js-mongo-db-mui-boilerplate.vercel.app/)
 
 </div>
 
@@ -69,14 +69,14 @@ Environmental variables in this project include:
 
 <h3 align="center">Development</h3>
 
-- Start the development server by running `yarn dev` or `npm run dev`. Getting started by create a `.env.local` file with the above variables. See [Environment Variables](https://nextjs.org/docs/basic-features/environment-variables).
+- Start the development server by running `yarn dev`. Getting started by create a `.env.local` file with the above variables. See [Environment Variables](https://nextjs.org/docs/basic-features/environment-variables).
 - Start Storybook with `yarn storybook`
 
 <h2 align="center">Deployment</h2>
 
 This project can be deployed [anywhere Next.js can be deployed](https://nextjs.org/docs/deployment). Make sure to set the environment variables using the options provided by your cloud/hosting providers.
 
-After building using `yarn build`, simply start the server using `npm run start`.
+After building using `yarn build`, simply start the server using `yarn start`.
 
 You can also deploy this with serverless providers given the correct setup.
 

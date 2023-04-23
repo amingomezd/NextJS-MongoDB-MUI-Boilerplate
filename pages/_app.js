@@ -1,5 +1,6 @@
 import '../src/common/styles/globalStyles.css';
 import { Toaster } from 'react-hot-toast';
+import { Analytics } from '@vercel/analytics/react';
 
 /**
  * MUI Imports and Configs
@@ -20,6 +21,7 @@ export default function MyApp({ Component, pageProps, emotionCache = clientSideE
         <CssBaseline />
         <Component {...pageProps} />
         <Toaster />
+        <Analytics />
       </ThemeProvider>
     </CacheProvider>
   );

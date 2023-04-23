@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import PageLayout from '../../../../src/components/Layout/PageLayout';
-import PageContentBox from '../../../../src/components/Layout/PageContentBox';
+import PageLayout from '@/src/components/Layout/PageLayout';
+import PageContentBox from '@/src/components/Layout/PageContentBox';
 import { Button, Stack, Typography } from '@mui/material';
 
 const EmailVerifyPageView = ({ valid }) => {

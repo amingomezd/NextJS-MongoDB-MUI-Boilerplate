@@ -1,5 +1,5 @@
-import PageLayout from '../../../src/components/Layout/PageLayout';
-import PageContentBox from '../../../src/components/Layout/PageContentBox';
+import PageLayout from '@/src/components/Layout/PageLayout';
+import PageContentBox from '@/src/components/Layout/PageContentBox';
 import Avatar from '@mui/material/Avatar';
 import { Paper, Stack, Typography } from '@mui/material';
 

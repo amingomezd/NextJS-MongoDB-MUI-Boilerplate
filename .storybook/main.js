@@ -9,7 +9,7 @@ module.exports = {
     name: '@storybook/react-webpack5',
     options: {}
   },
-  stories: ['../pages/**/*.stories.js', '../components/**/*.stories.js'],
+  stories: ['../pages/**/*.stories.jsx', '../src/components/**/*.stories.jsx'],
   staticDirs: ['../public'],
   webpackFinal: async (config) => {
     config.resolve.alias['@'] = path.resolve(__dirname, '../');

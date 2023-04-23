@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import PageLayout from '../../../../src/components/Layout/PageLayout';
-import PageContentBox from '../../../../src/components/Layout/PageContentBox';
+import PageLayout from '@/src/components/Layout/PageLayout';
+import PageContentBox from '@/src/components/Layout/PageContentBox';
 import { Button, Stack, TextField, Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 

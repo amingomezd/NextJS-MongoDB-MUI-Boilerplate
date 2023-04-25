@@ -3,6 +3,7 @@ import { useCallback, useRef, useState } from 'react';
 import { fetcher } from '@/src/common/utils/fetch';
 import toast from 'react-hot-toast';
 import ResetPasswordTokenPageView from './ResetPasswordTokenPageView';
+import dbConnect from '@/src/common/utils/dbConnect';
 
 const ResetPasswordTokenPage = ({ valid, token }) => {
   const passwordRef = useRef();
@@ -34,6 +35,7 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
 };
 
 export async function getServerSideProps(context) {
+  await dbConnect();
   const tokenDoc = await findTokenByIdAndType(context.params.token, 'passwordReset');
 
   return { props: { token: context.params.token, valid: !!tokenDoc } };

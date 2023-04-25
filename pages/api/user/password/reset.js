@@ -1,12 +1,11 @@
 import { ValidateProps } from '@/src/config/constants';
 import { CONFIG as MAIL_CONFIG, sendMail } from '@/src/services/mail';
-import { validateBody } from 'middlewares';
-import { getMongoDb } from '@/src/services/mongodb';
+import { validateBody } from '@/middlewares';
 import { ncOpts } from '@/src/config/nc';
 import nc from 'next-connect';
 import normalizeEmail from 'validator/lib/normalizeEmail';
 import { findUserByEmail, UNSAFE_updateUserPassword } from '@/src/services/user';
-import { createToken, findAndDeleteTokenByIdAndType } from '@/src/services/auth/token';
+import { createToken, findAndDeleteTokenByIdAndType } from '@/src/services/token';
 
 const handler = nc(ncOpts);
 
@@ -20,10 +19,8 @@ handler.post(
     additionalProperties: false
   }),
   async (req, res) => {
-    const db = await getMongoDb();
-
     const email = normalizeEmail(req.body.email);
-    const user = await findUserByEmail(db, email);
+    const user = await findUserByEmail(email);
     if (!user) {
       res.status(400).json({
         error: { message: 'We couldn’t find that email. Please try again.' }
@@ -31,7 +28,7 @@ handler.post(
       return;
     }
 
-    const token = await createToken(db, {
+    const token = await createToken({
       creatorId: user._id,
       type: 'passwordReset',
       expireAt: new Date(Date.now() + 1000 * 60 * 20)
@@ -40,7 +37,7 @@ handler.post(
     await sendMail({
       to: email,
       from: MAIL_CONFIG.from,
-      subject: '[nextjs-mongodb-app] Reset your password.',
+      subject: '[nextjs-mongodb-MUI-app] Reset your password.',
       html: `
       <div>
         <p>Hello, ${user.name}</p>
@@ -64,14 +61,14 @@ handler.put(
     additionalProperties: false
   }),
   async (req, res) => {
-    const db = await getMongoDb();
+    const deletedToken = await findAndDeleteTokenByIdAndType(req.body.token, 'passwordReset');
 
-    const deletedToken = await findAndDeleteTokenByIdAndType(db, req.body.token, 'passwordReset');
     if (!deletedToken) {
       res.status(403).end();
       return;
     }
-    await UNSAFE_updateUserPassword(db, deletedToken.creatorId, req.body.password);
+
+    await UNSAFE_updateUserPassword(deletedToken.creatorId, req.body.password);
     res.status(204).end();
   }
 );

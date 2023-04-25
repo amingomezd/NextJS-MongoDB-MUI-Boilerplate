@@ -17,6 +17,7 @@ const EmailVerify = ({ user }) => {
       setStatus('');
     }
   }, []);
+
   if (user.emailVerified) return null;
 
   return <EmailVerifyView user={user} status={status} verify={verify} />;

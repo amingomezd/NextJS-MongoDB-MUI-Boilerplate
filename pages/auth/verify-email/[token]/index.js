@@ -1,6 +1,5 @@
-import { getMongoDb } from '@/src/services/mongodb';
 import EmailVerifyPageView from './EmailVerifyPageView';
-import { findAndDeleteTokenByIdAndType } from '@/src/services/auth/token';
+import { findAndDeleteTokenByIdAndType } from '@/src/services/token';
 import { updateUserById } from '@/src/services/user';
 
 export default function EmailVerifyPage({ valid }) {
@@ -8,15 +7,13 @@ export default function EmailVerifyPage({ valid }) {
 }
 
 export async function getServerSideProps(context) {
-  const db = await getMongoDb();
-
   const { token } = context.params;
 
-  const deletedToken = await findAndDeleteTokenByIdAndType(db, token, 'emailVerify');
+  const deletedToken = await findAndDeleteTokenByIdAndType(token, 'emailVerify');
 
   if (!deletedToken) return { props: { valid: false } };
 
-  await updateUserById(db, deletedToken.creatorId, {
+  await updateUserById(deletedToken.creatorId, {
     emailVerified: true
   });
 

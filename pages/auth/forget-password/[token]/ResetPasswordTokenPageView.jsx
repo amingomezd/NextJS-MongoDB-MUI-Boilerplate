@@ -31,7 +31,7 @@ const ResetPasswordTokenPageView = ({ valid, passwordRef, status, onSubmit }) =>
                   </Stack>
                 </>
               )}
-              <Link href='/pages/index' passHref>
+              <Link href='/auth/login' passHref>
                 <Button variant='outlined'>Return to login</Button>
               </Link>
             </>
@@ -41,7 +41,7 @@ const ResetPasswordTokenPageView = ({ valid, passwordRef, status, onSubmit }) =>
               <Typography variant='subtitle1' textAlign='center'>
                 It looks like you may have clicked on an invalid link. Please close this window and try again.
               </Typography>
-              <Link href='/pages/index' passHref>
+              <Link href='/auth/login' passHref>
                 <Button variant='contained'>Return to login</Button>
               </Link>
             </>

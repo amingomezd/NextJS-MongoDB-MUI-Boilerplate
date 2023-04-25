@@ -1,12 +1,12 @@
 This project was based in hoangvvo [Next.js MongoDB](https://github.com/hoangvvo/nextjs-mongodb-app) boilerplate
 
-<h1 align="center">Next.js MongoDB Material UI Starter Boilerplate.</h1>
+<h1 align="center">Next.js, Mongo(Mongoose) and Material UI Starter Boilerplate.</h1>
 
 <div align="center">
   
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Famingomezd%2FNextJS-MongoDB-MUI-Boilerplate&env=MONGODB_URI,NODEMAILER_CONFIG,WEB_URI,CLOUDINARY_URL&envDescription=MONGODB_URI%20and%20NODEMAILER_CONFIG%20are%20mandatory)
 
-An [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www.mongodb.com/) web application with [**Material UI**](https://mui.com/) as the design system WITH MINIMUM CUSTOM CSS, just bare-bones MUI with default theme and colors palette, designed as a starting point of any web application. All pages and components has stories with storybook v7.
+A [**Next.js**](https://github.com/zeit/next.js/) and [**Mongoose**](https://mongoosejs.com/) web application with [**Material UI**](https://mui.com/) as the design system WITH MINIMUM CUSTOM CSS, just bare-bones MUI with default theme and colors palette, designed as a starting point of any web application. All pages and components has stories with storybook v7.
 
 [ONLINE DEMO](https://next-js-mongo-db-mui-boilerplate.vercel.app/)
 
@@ -25,8 +25,6 @@ Storybook v7
 ✨ Full [API Routes](https://nextjs.org/blog/next-9#api-routes) implementation and 👻 Serverless ready
 
 🤠 Middleware pattern, compatible with Express ecosystem, powered by [next-connect](https://github.com/hoangvvo/next-connect)
-
-📙 Can be adapted to any databases besides MongoDB (Just update [api-lib/db](api-lib/db))
 
 </div>
 
@@ -63,9 +61,9 @@ Storybook v7
 Environmental variables in this project include:
 
 - `MONGODB_URI` (Mandatory) The MongoDB Connection String (with credentials and database name)
-- `WEB_URI` The _URL_ of your web app.
+- `WEB_URI` (Mandatory) The _URL_ of your web app.
 - `CLOUDINARY_URL` (optional, Cloudinary **only**) Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration).
-- `NODEMAILER_CONFIG` (Mandatory) JSON stringified nodemailer config. eg. `{"service":"Gmail","auth":{"user":"hoangvvo.02@gmail.com","pass":"aHR0cHM6Ly95b3V0dS5iZS9kUXc0dzlXZ1hjUQ=="}}`
+- `NODEMAILER_CONFIG` (Mandatory) JSON stringified nodemailer config. eg. `{"service":"Gmail","auth":{"user":"example@gmail.com","pass":"aHR0cHM6Ly95b3V0dS5iZS9kUXc0dzlXZ1hjUQ=="}}`
 
 <h3 align="center">Development</h3>
 

@@ -1,6 +1,6 @@
-import { passport } from 'src/services/auth';
-import { auths } from 'middlewares';
+import { passport } from '@/src/services/auth';
 import { ncOpts } from '@/src/config/nc';
+import { auths } from '@/middlewares';
 import nc from 'next-connect';
 
 const handler = nc(ncOpts);

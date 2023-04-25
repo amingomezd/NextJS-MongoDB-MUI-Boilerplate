@@ -1,7 +1,6 @@
 import { ValidateProps } from '@/src/config/constants';
 import { updateUserPasswordByOldPassword } from '@/src/services/user';
-import { auths, validateBody } from 'middlewares';
-import { getMongoDb } from '@/src/services/mongodb';
+import { auths, validateBody } from '@/middlewares';
 import { ncOpts } from '@/src/config/nc';
 import nc from 'next-connect';
 
@@ -24,11 +23,9 @@ handler.put(
       return;
     }
 
-    const db = await getMongoDb();
-
     const { oldPassword, newPassword } = req.body;
 
-    const success = await updateUserPasswordByOldPassword(db, req.user._id, oldPassword, newPassword);
+    const success = await updateUserPasswordByOldPassword(req.user._id, oldPassword, newPassword);
 
     if (!success) {
       res.status(401).json({

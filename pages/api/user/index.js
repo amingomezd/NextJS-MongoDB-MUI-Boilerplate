@@ -27,6 +27,14 @@ if (process.env.CLOUDINARY_URL) {
 handler.use(...auths);
 
 handler.get(async (req, res) => {
+  const { publicUserData } = req.query;
+
+  //   Get public data from user if the profile page is visited unauthenticated
+  if (publicUserData) {
+    const user = await findUserByUsername(publicUserData);
+    return res.json(user);
+  }
+
   if (!req.user) return res.json({ user: null });
   return res.json({ user: req.user });
 });
@@ -48,7 +56,6 @@ handler.post(
     },
     true
   ),
-  ...auths,
   async (req, res) => {
     let { username, name, email, password } = req.body;
     username = slugUsername(req.body.username);

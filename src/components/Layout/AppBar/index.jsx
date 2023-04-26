@@ -7,7 +7,8 @@ import { useRouter } from 'next/router';
 
 const Appbar = () => {
   const router = useRouter();
-  const { data: { user } = {}, mutate } = useCurrentUser();
+  const { data, mutate } = useCurrentUser();
+  const user = data?.user;
 
   const userSettings = [
     { name: 'Profile', url: `/user/${user?.username}` },

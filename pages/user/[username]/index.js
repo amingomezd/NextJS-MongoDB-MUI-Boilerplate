@@ -1,22 +1,35 @@
-import { findUserByUsername } from '@/src/services/user';
 import UserPageView from './UserPageView';
-import dbConnect from '@/src/common/utils/dbConnect';
+import { useEffect, useState } from 'react';
+import { fetcher } from '@/src/common/utils/fetch';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
 
-export default function UserPage({ user }) {
+export default function UserPage() {
+  const [user, setUser] = useState({});
+  const { query } = useRouter();
+  const { data, isLoading } = useSWR('/api/user', fetcher);
+
+  useEffect(() => {
+    if (!isLoading) {
+      if (!data?.user) {
+        fetcher(`/api/user?publicUserData=${query.username}`, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' }
+        })
+          .then((user) => {
+            setUser(user);
+          })
+          .catch((error) => {
+            toast.error(error.message);
+          });
+      } else {
+        setUser(data.user);
+      }
+    }
+  }, [isLoading]);
+
+  if (isLoading) return null;
+
   return <UserPageView user={user} />;
-}
-
-export async function getServerSideProps(context) {
-  await dbConnect();
-  const user = await findUserByUsername(context.params.username);
-
-  if (!user) {
-    return {
-      notFound: true
-    };
-  }
-
-  const serializedUser = JSON.parse(JSON.stringify(user));
-  serializedUser._id = String(serializedUser._id);
-  return { props: { user: serializedUser } };
 }

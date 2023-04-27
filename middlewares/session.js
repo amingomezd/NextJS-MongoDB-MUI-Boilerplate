@@ -8,7 +8,7 @@ const client = dbConnect()
   .catch((err) => console.log(err));
 
 const mongoStore = MongoStore.create({
-  client: client,
+  clientPromise: client,
   stringify: false,
   autoRemove: 'interval',
   autoRemoveInterval: 10

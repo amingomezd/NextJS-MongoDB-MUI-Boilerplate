@@ -21,7 +21,9 @@ const checkPasswordResetTokenValidity = async (req, res) => {
   const { token } = req.query;
   const tokenDoc = await findTokenByIdAndType(token, 'passwordReset');
 
-  if (!tokenDoc) return res.statusCode(404).end();
+  if (!tokenDoc) {
+    return res.status(404).send({ error: 'Invalid Token' });
+  }
 
   return res.json({ token: tokenDoc._id, valid: !!tokenDoc });
 };

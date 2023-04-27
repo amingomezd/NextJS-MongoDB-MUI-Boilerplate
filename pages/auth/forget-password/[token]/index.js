@@ -42,7 +42,7 @@ const ResetPasswordTokenPage = () => {
           setToken({ value: res.token, valid: res.valid });
         })
         .catch((error) => {
-          toast.error(error.message);
+          toast.error(error);
         });
     }
   }, [isReady]);

@@ -7,8 +7,8 @@ import authController from '@/src/api/controllers/authController';
 const router = createRouter();
 
 router
-  .use(expressWrapper(cors()))
   .use(...auths)
+  .use(expressWrapper(cors()))
 
   .get(authController.checkPasswordResetTokenValidity);
 

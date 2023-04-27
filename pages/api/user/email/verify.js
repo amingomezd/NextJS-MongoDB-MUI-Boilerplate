@@ -7,8 +7,8 @@ import userController from '@/src/api/controllers/userController';
 const router = createRouter();
 
 router
-  .use(expressWrapper(cors()))
   .use(...auths)
+  .use(expressWrapper(cors()))
 
   .post(userController.sendVerificationEmail);
 

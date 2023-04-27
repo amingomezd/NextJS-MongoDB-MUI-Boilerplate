@@ -1,14 +1,15 @@
-import { findTokenByIdAndType } from '@/src/services/token';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { fetcher } from '@/src/common/utils/fetch';
 import toast from 'react-hot-toast';
 import ResetPasswordTokenPageView from './ResetPasswordTokenPageView';
-import dbConnect from '@/src/common/utils/dbConnect';
+import { useRouter } from 'next/router';
 
-const ResetPasswordTokenPage = ({ valid, token }) => {
+const ResetPasswordTokenPage = () => {
   const passwordRef = useRef();
-  // 'loading' | 'success'
   const [status, setStatus] = useState();
+  const [token, setToken] = useState({});
+  const { query, isReady } = useRouter();
+
   const onSubmit = useCallback(
     async (event) => {
       event.preventDefault();
@@ -18,7 +19,7 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            token,
+            token: token.value,
             password: passwordRef.current.value
           })
         });
@@ -31,14 +32,24 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
     [token]
   );
 
-  return <ResetPasswordTokenPageView valid={valid} passwordRef={passwordRef} status={status} onSubmit={onSubmit} />;
+  useEffect(() => {
+    if (isReady) {
+      fetcher(`/api/auth/forget-password?token=${query.token}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      })
+        .then((res) => {
+          setToken({ value: res.token, valid: res.valid });
+        })
+        .catch((error) => {
+          toast.error(error.message);
+        });
+    }
+  }, [isReady]);
+
+  return (
+    <ResetPasswordTokenPageView valid={token.valid} passwordRef={passwordRef} status={status} onSubmit={onSubmit} />
+  );
 };
-
-export async function getServerSideProps(context) {
-  await dbConnect();
-  const tokenDoc = await findTokenByIdAndType(context.params.token, 'passwordReset');
-
-  return { props: { token: context.params.token, valid: !!tokenDoc } };
-}
 
 export default ResetPasswordTokenPage;

@@ -1,23 +1,25 @@
 import EmailVerifyPageView from './EmailVerifyPageView';
-import { findAndDeleteTokenByIdAndType } from '@/src/services/token';
-import { updateUserById } from '@/src/services/user';
-import dbConnect from '@/src/common/utils/dbConnect';
+import { useRouter } from 'next/router';
+import { fetcher } from '@/src/common/utils/fetch';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
-export default function EmailVerifyPage({ valid }) {
+export default function EmailVerifyPage() {
+  const { query, isReady } = useRouter();
+  const [valid, setValid] = useState(false);
+
+  useEffect(() => {
+    if (isReady) {
+      fetcher(`/api/auth/verify-email?token=${query.token}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      })
+        .then(setValid)
+        .catch((error) => {
+          toast.error(error.message);
+        });
+    }
+  }, [isReady]);
+
   return <EmailVerifyPageView valid={valid} />;
-}
-
-export async function getServerSideProps(context) {
-  await dbConnect();
-  const { token } = context.params;
-
-  const deletedToken = await findAndDeleteTokenByIdAndType(token, 'emailVerify');
-
-  if (!deletedToken) return { props: { valid: false } };
-
-  await updateUserById(deletedToken.creatorId, {
-    emailVerified: true
-  });
-
-  return { props: { valid: true } };
 }

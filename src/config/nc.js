@@ -1,7 +1,9 @@
 export const ncOpts = {
-  onError(err, req, res) {
-    console.error(err);
-    res.statusCode = err.status && err.status >= 100 && err.status < 600 ? err.status : 500;
-    res.json({ message: err.message });
+  onError: (err, req, res) => {
+    console.error(err.stack);
+    res.status(500).end('Something broke!');
+  },
+  onNoMatch: (req, res) => {
+    res.status(404).end('Page is not found');
   }
 };

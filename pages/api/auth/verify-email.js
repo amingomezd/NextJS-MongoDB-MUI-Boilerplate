@@ -1,24 +1,15 @@
 import { ncOpts } from '@/src/config/nc';
 import { auths } from '@/middlewares';
-import nc from 'next-connect';
-import { updateUserById } from '@/src/services/user';
-import { findAndDeleteTokenByIdAndType } from '@/src/services/token';
+import { createRouter, expressWrapper } from 'next-connect';
+import cors from 'cors';
+import authController from '@/src/api/controllers/authController';
 
-const handler = nc(ncOpts);
+const router = createRouter();
 
-handler.use(...auths);
+router
+  .use(expressWrapper(cors()))
+  .use(...auths)
 
-handler.get(async (req, res) => {
-  const { token } = req.query;
+  .get(authController.verifyEmailByToken);
 
-  const deletedToken = await findAndDeleteTokenByIdAndType(token, 'emailVerify');
-  if (!deletedToken) {
-    return res.status(404).json(false);
-  }
-
-  await updateUserById(deletedToken.creatorId, { emailVerified: true });
-
-  return res.json(true);
-});
-
-export default handler;
+export default router.handler(ncOpts);

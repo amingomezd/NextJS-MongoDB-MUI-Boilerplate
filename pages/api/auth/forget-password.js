@@ -1,19 +1,15 @@
 import { ncOpts } from '@/src/config/nc';
 import { auths } from '@/middlewares';
-import nc from 'next-connect';
-import { findTokenByIdAndType } from '@/src/services/token';
+import { createRouter, expressWrapper } from 'next-connect';
+import cors from 'cors';
+import authController from '@/src/api/controllers/authController';
 
-const handler = nc(ncOpts);
+const router = createRouter();
 
-handler.use(...auths);
+router
+  .use(expressWrapper(cors()))
+  .use(...auths)
 
-handler.get(async (req, res) => {
-  const { token } = req.query;
-  const tokenDoc = await findTokenByIdAndType(token, 'passwordReset');
+  .get(authController.checkPasswordResetTokenValidity);
 
-  if (!tokenDoc) res.statusCode(404);
-
-  return res.json({ token: tokenDoc._id, valid: !!tokenDoc });
-});
-
-export default handler;
+export default router.handler(ncOpts);

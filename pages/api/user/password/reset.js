@@ -1,76 +1,38 @@
 import { ValidateProps } from '@/src/config/constants';
-import { CONFIG as MAIL_CONFIG, sendMail } from '@/src/services/mail';
 import { validateBody } from '@/middlewares';
 import { ncOpts } from '@/src/config/nc';
-import nc from 'next-connect';
-import normalizeEmail from 'validator/lib/normalizeEmail';
-import { findUserByEmail, UNSAFE_updateUserPassword } from '@/src/services/user';
-import { createToken, findAndDeleteTokenByIdAndType } from '@/src/services/token';
+import { createRouter, expressWrapper } from 'next-connect';
+import cors from 'cors';
+import userController from '@/src/api/controllers/userController';
 
-const handler = nc(ncOpts);
+const router = createRouter();
 
-handler.post(
-  validateBody({
-    type: 'object',
-    properties: {
-      email: ValidateProps.user.email
-    },
-    required: ['email'],
-    additionalProperties: false
-  }),
-  async (req, res) => {
-    const email = normalizeEmail(req.body.email);
-    const user = await findUserByEmail(email);
-    if (!user) {
-      res.status(400).json({
-        error: { message: 'We couldn’t find that email. Please try again.' }
-      });
-      return;
-    }
+router
+  .use(expressWrapper(cors()))
 
-    const token = await createToken({
-      creatorId: user._id,
-      type: 'passwordReset',
-      expireAt: new Date(Date.now() + 1000 * 60 * 20)
-    });
+  .post(
+    validateBody({
+      type: 'object',
+      properties: {
+        email: ValidateProps.user.email
+      },
+      required: ['email'],
+      additionalProperties: false
+    }),
+    userController.sendPasswordResetEmail
+  )
 
-    await sendMail({
-      to: email,
-      from: MAIL_CONFIG.from,
-      subject: '[nextjs-mongodb-MUI-app] Reset your password.',
-      html: `
-      <div>
-        <p>Hello, ${user.name}</p>
-        <p>Please follow <a href='${process.env.WEB_URI}/auth/forget-password/${token._id}'>this link</a> to reset your password.</p>
-      </div>
-      `
-    });
+  .put(
+    validateBody({
+      type: 'object',
+      properties: {
+        password: ValidateProps.user.password,
+        token: { type: 'string', minLength: 0 }
+      },
+      required: ['password', 'token'],
+      additionalProperties: false
+    }),
+    userController.updatePasswordWithToken
+  );
 
-    res.status(204).end();
-  }
-);
-
-handler.put(
-  validateBody({
-    type: 'object',
-    properties: {
-      password: ValidateProps.user.password,
-      token: { type: 'string', minLength: 0 }
-    },
-    required: ['password', 'token'],
-    additionalProperties: false
-  }),
-  async (req, res) => {
-    const deletedToken = await findAndDeleteTokenByIdAndType(req.body.token, 'passwordReset');
-
-    if (!deletedToken) {
-      res.status(403).end();
-      return;
-    }
-
-    await UNSAFE_updateUserPassword(deletedToken.creatorId, req.body.password);
-    res.status(204).end();
-  }
-);
-
-export default handler;
+export default router.handler(ncOpts);

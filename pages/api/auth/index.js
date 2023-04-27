@@ -1,19 +1,20 @@
-import { passport } from '@/src/services/auth';
+import { passport } from '@/src/api/services/auth';
 import { ncOpts } from '@/src/config/nc';
 import { auths } from '@/middlewares';
-import nc from 'next-connect';
+import { createRouter, expressWrapper } from 'next-connect';
+import cors from 'cors';
+import authController from '@/src/api/controllers/authController';
+import { responseTime } from '@/middlewares/responseTime';
 
-const handler = nc(ncOpts);
+const router = createRouter();
 
-handler.use(...auths);
+router
+  .use(...auths)
+  .use(expressWrapper(cors()))
+  .use(responseTime)
 
-handler.post(passport.authenticate('local'), (req, res) => {
-  res.json({ user: req.user });
-});
+  .post(passport.authenticate('local'), authController.getAuthenticatedUser)
 
-handler.delete(async (req, res) => {
-  await req.session.destroy();
-  res.status(204).end();
-});
+  .delete(authController.logout);
 
-export default handler;
+export default router.handler(ncOpts);

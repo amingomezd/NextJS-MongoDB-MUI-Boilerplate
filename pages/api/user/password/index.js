@@ -1,41 +1,27 @@
 import { ValidateProps } from '@/src/config/constants';
-import { updateUserPasswordByOldPassword } from '@/src/services/user';
 import { auths, validateBody } from '@/middlewares';
 import { ncOpts } from '@/src/config/nc';
-import nc from 'next-connect';
+import { createRouter, expressWrapper } from 'next-connect';
+import cors from 'cors';
+import userController from '@/src/api/controllers/userController';
 
-const handler = nc(ncOpts);
-handler.use(...auths);
+const router = createRouter();
 
-handler.put(
-  validateBody({
-    type: 'object',
-    properties: {
-      oldPassword: ValidateProps.user.password,
-      newPassword: ValidateProps.user.password
-    },
-    required: ['oldPassword', 'newPassword'],
-    additionalProperties: false
-  }),
-  async (req, res) => {
-    if (!req.user) {
-      res.json(401).end();
-      return;
-    }
+router
+  .use(expressWrapper(cors()))
+  .use(...auths)
 
-    const { oldPassword, newPassword } = req.body;
+  .put(
+    validateBody({
+      type: 'object',
+      properties: {
+        oldPassword: ValidateProps.user.password,
+        newPassword: ValidateProps.user.password
+      },
+      required: ['oldPassword', 'newPassword'],
+      additionalProperties: false
+    }),
+    userController.updateUserPassword
+  );
 
-    const success = await updateUserPasswordByOldPassword(req.user._id, oldPassword, newPassword);
-
-    if (!success) {
-      res.status(401).json({
-        error: { message: 'The old password you entered is incorrect.' }
-      });
-      return;
-    }
-
-    res.status(204).end();
-  }
-);
-
-export default handler;
+export default router.handler(ncOpts);

@@ -10,7 +10,7 @@ export const fetcher = (...args) => {
     if (res.ok) {
       return payload;
     } else {
-      return Promise.reject(payload.error || new Error('Something went wrong'));
+      return Promise.reject(payload?.error || new Error('Something went wrong'));
     }
   });
 };

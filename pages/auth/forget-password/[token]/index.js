@@ -47,8 +47,10 @@ const ResetPasswordTokenPage = () => {
     }
   }, [isReady]);
 
+  if (!isReady) return null;
+
   return (
-    <ResetPasswordTokenPageView valid={token.valid} passwordRef={passwordRef} status={status} onSubmit={onSubmit} />
+    <ResetPasswordTokenPageView valid={token?.valid} passwordRef={passwordRef} status={status} onSubmit={onSubmit} />
   );
 };
 

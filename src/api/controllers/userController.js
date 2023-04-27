@@ -7,7 +7,8 @@ import {
 } from '@/src/api/services/user';
 import { slugUsername } from '@/src/common/utils';
 import isEmail from 'validator/lib/isEmail';
-import User from '@/src/api/services/user/data/User';
+import User from '../services/user/data/User';
+import Token from '../services/token/data/Token';
 import bcrypt from 'bcryptjs';
 import { v2 as cloudinary } from 'cloudinary';
 import normalizeEmail from 'validator/lib/normalizeEmail';
@@ -131,11 +132,20 @@ const sendPasswordResetEmail = async (req, res) => {
     });
   }
 
-  const token = await createToken({
-    creatorId: user._id,
-    type: 'passwordReset',
-    expireAt: new Date(Date.now() + 1000 * 60 * 20)
-  });
+  let token = await Token.findOne({ creatorId: user._id });
+
+  if (token && Date.now() > token.expireAt) {
+    await token.deleteOne();
+    token = null;
+  }
+
+  if (!token) {
+    token = await createToken({
+      creatorId: user._id,
+      type: 'passwordReset',
+      expireAt: new Date(Date.now() + 1000 * 60 * 20)
+    });
+  }
 
   await sendMail({
     to: email,

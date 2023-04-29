@@ -3,7 +3,7 @@ import { auths, validateBody } from '@/middlewares';
 import { ncOpts } from '@/src/config/nc';
 import { createRouter, expressWrapper } from 'next-connect';
 import cors from 'cors';
-import userController from '@/src/api/controllers/userController';
+import * as authController from '@/src/api/controllers/authController';
 
 const router = createRouter();
 
@@ -21,7 +21,9 @@ router
       required: ['oldPassword', 'newPassword'],
       additionalProperties: false
     }),
-    userController.updateUserPassword
-  );
+    authController.updateUserPassword
+  )
+
+  .get(authController.checkPasswordResetTokenValidity);
 
 export default router.handler(ncOpts);

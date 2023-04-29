@@ -1,7 +1,7 @@
 import { Card, CardActions, CardContent, CardHeader, Stack, TextField } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 
-const AuthView = ({ isLoading, onSubmit, oldPasswordRef, newPasswordRef }) => {
+const ChangePasswordView = ({ isLoading, onSubmit, oldPasswordRef, newPasswordRef }) => {
   return (
     <Card elevation={1} component='form' onSubmit={onSubmit}>
       <CardHeader title='Password' />
@@ -30,4 +30,4 @@ const AuthView = ({ isLoading, onSubmit, oldPasswordRef, newPasswordRef }) => {
   );
 };
 
-export default AuthView;
+export default ChangePasswordView;

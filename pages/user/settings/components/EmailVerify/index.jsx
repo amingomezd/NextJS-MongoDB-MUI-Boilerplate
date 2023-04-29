@@ -9,7 +9,7 @@ const EmailVerify = ({ user }) => {
   const verify = useCallback(async () => {
     try {
       setStatus('loading');
-      await fetcher('/api/user/email/verify', { method: 'POST' });
+      await fetcher('/api/auth/email/verify', { method: 'POST' });
       toast.success('An email has been sent to your mailbox. Follow the instruction to verify your email.');
       setStatus('success');
     } catch (e) {

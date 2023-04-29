@@ -15,7 +15,7 @@ const ResetPasswordTokenPage = () => {
       event.preventDefault();
       setStatus('loading');
       try {
-        await fetcher('/api/user/password/reset', {
+        await fetcher('/api/auth/password/reset', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -34,7 +34,7 @@ const ResetPasswordTokenPage = () => {
 
   useEffect(() => {
     if (isReady) {
-      fetcher(`/api/auth/forget-password?token=${query.token}`, {
+      fetcher(`/api/auth/password?token=${query.token}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
       })

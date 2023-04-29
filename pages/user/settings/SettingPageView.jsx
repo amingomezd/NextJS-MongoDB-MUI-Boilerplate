@@ -1,6 +1,6 @@
 import AboutYou from './components/AboutYou';
 import EmailVerify from './components/EmailVerify';
-import Auth from './components/Auth';
+import ChangePassword from './components/ChangePassword';
 import PageContentBox from '@/src/components/Layout/PageContentBox';
 import PageLayout from '@/src/components/Layout/PageLayout';
 import { Stack } from '@mui/material';
@@ -13,7 +13,7 @@ const SettingPageView = ({ data, mutate }) => {
           <Stack spacing={3}>
             <EmailVerify user={data.user} />
             <AboutYou user={data.user} mutate={mutate} />
-            <Auth user={data.user} />
+            <ChangePassword user={data.user} />
           </Stack>
         ) : null}
       </PageContentBox>

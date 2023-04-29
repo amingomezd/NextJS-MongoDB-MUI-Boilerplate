@@ -40,21 +40,3 @@ export async function updateUserById(id, data) {
   await user.save();
   return user;
 }
-
-export async function updateUserPasswordByOldPassword(id, oldPassword, newPassword) {
-  const user = await User.findById(id);
-  if (!user) return false;
-  const matched = await bcrypt.compare(oldPassword, user.originalPassword);
-  if (!matched) return false;
-  user.originalPassword = await bcrypt.hash(newPassword, 10);
-
-  await user.save();
-  return true;
-}
-
-export async function UNSAFE_updateUserPassword(id, newPassword) {
-  const user = await User.findById(id);
-  if (!user) return false;
-  user.originalPassword = await bcrypt.hash(newPassword, 10);
-  await user.save();
-}

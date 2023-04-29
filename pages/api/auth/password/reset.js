@@ -3,7 +3,7 @@ import { auths, validateBody } from '@/middlewares';
 import { ncOpts } from '@/src/config/nc';
 import { createRouter, expressWrapper } from 'next-connect';
 import cors from 'cors';
-import userController from '@/src/api/controllers/userController';
+import * as authController from '@/src/api/controllers/authController';
 
 const router = createRouter();
 
@@ -20,7 +20,7 @@ router
       required: ['email'],
       additionalProperties: false
     }),
-    userController.sendPasswordResetEmail
+    authController.sendPasswordResetEmail
   )
 
   .put(
@@ -33,7 +33,7 @@ router
       required: ['password', 'token'],
       additionalProperties: false
     }),
-    userController.updatePasswordWithToken
+    authController.updatePasswordWithToken
   );
 
 export default router.handler(ncOpts);

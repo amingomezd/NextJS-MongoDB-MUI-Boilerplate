@@ -1,9 +1,9 @@
 import { useCallback, useRef, useState } from 'react';
 import { fetcher } from '@/src/common/utils/fetch';
 import toast from 'react-hot-toast';
-import AuthView from './AuthView';
+import ChangePasswordView from './ChangePasswordView';
 
-const Auth = () => {
+const ChangePassword = () => {
   const oldPasswordRef = useRef();
   const newPasswordRef = useRef();
 
@@ -13,7 +13,7 @@ const Auth = () => {
     e.preventDefault();
     try {
       setIsLoading(true);
-      await fetcher('/api/user/password', {
+      await fetcher('/api/auth/password', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -32,7 +32,7 @@ const Auth = () => {
   }, []);
 
   return (
-    <AuthView
+    <ChangePasswordView
       isLoading={isLoading}
       onSubmit={onSubmit}
       oldPasswordRef={oldPasswordRef}
@@ -41,4 +41,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default ChangePassword;

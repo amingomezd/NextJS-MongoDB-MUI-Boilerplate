@@ -10,7 +10,7 @@ export default function EmailVerifyPage() {
 
   useEffect(() => {
     if (isReady) {
-      fetcher(`/api/auth/verify-email?token=${query.token}`, {
+      fetcher(`/api/auth/email/verify?token=${query.token}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
       })

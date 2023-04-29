@@ -22,7 +22,8 @@ const SignupPage = () => {
       e.preventDefault();
       try {
         setIsLoading(true);
-        const response = await fetcher('/api/user', {
+
+        const response = await fetcher('/api/auth/user/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -32,11 +33,12 @@ const SignupPage = () => {
             username: usernameRef.current.value
           })
         });
-        mutate({ user: response.user }, false);
+
+        await mutate({ user: response.user }, false);
         toast.success('Your account has been created');
-        router.replace('/user/settings');
+        await router.replace('/user/settings');
       } catch (e) {
-        toast.error(e.message);
+        toast.error(e);
       } finally {
         setIsLoading(false);
       }

@@ -23,7 +23,7 @@ const ForgetPasswordPage = () => {
       setEmail(emailRef.current.value);
       setStatus('success');
     } catch (e) {
-      toast.error(e.message);
+      toast.error(e);
       setStatus(undefined);
     }
   }, []);

@@ -1,8 +1,7 @@
 import { slugUsername } from '@/src/common/utils';
 import isEmail from 'validator/lib/isEmail';
-import { findUserByEmail, findUserByUsername } from '@/src/api/services/user/index';
-import User from '@/src/api/services/user/data/User';
 import bcrypt from 'bcryptjs';
+import User from '@/src/api/services/user/data/User';
 
 /**
  * Validates user input and creates a new user.
@@ -17,16 +16,16 @@ import bcrypt from 'bcryptjs';
  * property, containing the newly created user document, or an `error`.
  * @throws {Error} If an error occurs while creating the user.
  */
-export const validateAndCreateUser = async ({ username, name, email, password }) => {
+export const createUserValidated = async ({ username, name, email, password }) => {
   const normalizedUsername = slugUsername(username);
 
   if (!isEmail(email)) {
     return { error: { message: 'The email you entered is invalid.', code: 400 } };
   }
-  if (await findUserByEmail(email)) {
+  if (await User.findUserByEmail(email)) {
     return { error: { message: 'The email has already been used.', code: 403 } };
   }
-  if (await findUserByUsername(normalizedUsername)) {
+  if (await User.findUserByUsername(normalizedUsername)) {
     return { error: { message: 'The username has already been taken.', code: 403 } };
   }
 

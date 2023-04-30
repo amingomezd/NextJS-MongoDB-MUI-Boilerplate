@@ -25,7 +25,7 @@ const ResetPasswordTokenPage = () => {
         });
         setStatus('success');
       } catch (e) {
-        toast.error(e.message);
+        toast.error(e);
         setStatus(undefined);
       }
     },

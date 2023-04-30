@@ -41,7 +41,7 @@ const AboutYou = ({ user, mutate }) => {
         mutate({ user: response.user }, false);
         toast.success('Your profile has been updated');
       } catch (e) {
-        toast.error(e.message);
+        toast.error(e);
       } finally {
         setIsLoading(false);
       }

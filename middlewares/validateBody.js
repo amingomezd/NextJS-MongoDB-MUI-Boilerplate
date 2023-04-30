@@ -11,9 +11,7 @@ export function validateBody(schema) {
     } else {
       const error = validate.errors[0];
       return res.status(400).json({
-        error: {
-          message: `"${error.instancePath.substring(1)}" ${error.message}`
-        }
+        error: `"${error.instancePath.substring(1)}" ${error.message}`
       });
     }
   };

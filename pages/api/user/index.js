@@ -1,10 +1,12 @@
 import { ValidateProps } from '@/src/config/constants';
 import { auths, validateBody } from '@/middlewares';
-import { ncOpts } from '@/src/config/nc';
+import { ncOpts } from '@/src/config/nextConnectConfig';
 import multer from 'multer';
 import { createRouter, expressWrapper } from 'next-connect';
 import cors from 'cors';
 import * as userController from '@/src/api/controllers/userController';
+import { requireLoggedInUser } from '@/middlewares/requireAuth';
+import { jsonParser } from '@/src/common/utils/bodyParser';
 
 const upload = multer({ dest: '/tmp' });
 const router = createRouter();
@@ -15,7 +17,24 @@ router
 
   .get(userController.getCurrentUser)
 
+  .post(
+    jsonParser,
+    validateBody(
+      {
+        type: 'object',
+        properties: {
+          username: ValidateProps.user.username
+        },
+        required: ['username'],
+        additionalProperties: false
+      },
+      true
+    ),
+    userController.getPublicUser
+  )
+
   .patch(
+    requireLoggedInUser,
     upload.single('profilePicture'),
     validateBody({
       type: 'object',

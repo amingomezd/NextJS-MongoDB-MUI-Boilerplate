@@ -13,7 +13,7 @@ const EmailVerify = ({ user }) => {
       toast.success('An email has been sent to your mailbox. Follow the instruction to verify your email.');
       setStatus('success');
     } catch (e) {
-      toast.error(e.message);
+      toast.error(e);
       setStatus('');
     }
   }, []);

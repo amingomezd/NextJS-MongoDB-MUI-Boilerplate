@@ -1,5 +1,5 @@
-import { passport } from '@/src/api/services/auth';
-import { ncOpts } from '@/src/config/nc';
+import passport from '@/src/api/lib/passport';
+import { ncOpts } from '@/src/config/nextConnectConfig';
 import { auths } from '@/middlewares';
 import { createRouter, expressWrapper } from 'next-connect';
 import cors from 'cors';

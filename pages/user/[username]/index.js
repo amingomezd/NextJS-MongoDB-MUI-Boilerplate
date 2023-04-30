@@ -13,15 +13,18 @@ export default function UserPage() {
   useEffect(() => {
     if (!isLoading) {
       if (!data?.user) {
-        fetcher(`/api/user?publicUserData=${query.username}`, {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' }
+        fetcher(`/api/user`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: query.username
+          })
         })
           .then((user) => {
             setUser(user);
           })
           .catch((error) => {
-            toast.error(error.message);
+            toast.error(error);
           });
       } else {
         setUser(data.user);

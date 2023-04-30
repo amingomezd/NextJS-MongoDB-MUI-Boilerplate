@@ -4,7 +4,7 @@ import cors from 'cors';
 import * as userController from '@/src/api/controllers/userController';
 import { jsonParser } from '@/src/common/utils/bodyParser';
 import { ValidateProps } from '@/src/config/constants';
-import { ncOpts } from '@/src/config/nc';
+import { ncOpts } from '@/src/config/nextConnectConfig';
 
 const router = createRouter();
 

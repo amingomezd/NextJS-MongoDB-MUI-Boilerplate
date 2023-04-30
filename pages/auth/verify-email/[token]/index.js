@@ -16,7 +16,7 @@ export default function EmailVerifyPage() {
       })
         .then(setValid)
         .catch((error) => {
-          toast.error(error.message);
+          toast.error(error);
         });
     }
   }, [isReady]);

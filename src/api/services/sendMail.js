@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport(nodemailerConfig);
 export async function sendMail({ from, to, subject, html }) {
   try {
     await transporter.sendMail({
-      from,
+      from: from || nodemailerConfig?.auth?.user,
       to,
       subject,
       html
@@ -18,7 +18,3 @@ export async function sendMail({ from, to, subject, html }) {
     throw new Error(`Could not send email: ${e.message}`);
   }
 }
-
-export const CONFIG = {
-  from: nodemailerConfig?.auth?.user
-};

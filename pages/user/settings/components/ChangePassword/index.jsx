@@ -23,7 +23,7 @@ const ChangePassword = () => {
       });
       toast.success('Your password has been updated');
     } catch (e) {
-      toast.error(e.message);
+      toast.error(e);
     } finally {
       setIsLoading(false);
       oldPasswordRef.current.value = '';

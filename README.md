@@ -1,97 +1,72 @@
-This project was based in hoangvvo [Next.js MongoDB](https://github.com/hoangvvo/nextjs-mongodb-app) boilerplate
 
-<h1 align="center">Next.js, Mongo(Mongoose) and Material UI Starter Boilerplate.</h1>
+# Next.js, Mongo(Mongoose) and Material UI Starter Boilerplate
 
-<div align="center">
-  
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Famingomezd%2FNextJS-MongoDB-MUI-Boilerplate&env=MONGODB_URI,NODEMAILER_CONFIG,WEB_URI,CLOUDINARY_URL&envDescription=MONGODB_URI%20and%20NODEMAILER_CONFIG%20are%20mandatory)
+A Next.js and Mongoose web application with Material UI as the design system WITH MINIMUM CUSTOM CSS, just bare-bones MUI with default theme and colors palette, designed as a starting point of any web application. All pages and components has stories with storybook v7.
 
-A [**Next.js**](https://github.com/zeit/next.js/) and [**Mongoose**](https://mongoosejs.com/) web application with [**Material UI**](https://mui.com/) as the design system WITH MINIMUM CUSTOM CSS, just bare-bones MUI with default theme and colors palette, designed as a starting point of any web application. All pages and components has stories with storybook v7.
 
-[ONLINE DEMO](https://next-js-mongo-db-mui-boilerplate.vercel.app/)
+## Demo
 
-</div>
+https://next-js-mongo-db-mui-boilerplate.vercel.app/
 
-<h2 align="center">Features</h2>
 
-<div align="center">
+## Acknowledgements
+[This project was based in hoangvvo Next.js MongoDB boilerplate](https://stackedit.io/app#:~:text=based%20in%20hoangvvo-,Next.js%20MongoDB,-boilerplate)
 
-Clean Material UI v5 implementation
+## Features
 
-Next.js 13 and React.js 18
+- MVC Architecture
+- Clean Material UI v5 implementation 💅
+- Full API Routes implementation and Serverless ready
+- Middleware pattern, compatible with Express ecosystem, powered by next-connect
 
-Storybook v7
 
-✨ Full [API Routes](https://nextjs.org/blog/next-9#api-routes) implementation and 👻 Serverless ready
 
-🤠 Middleware pattern, compatible with Express ecosystem, powered by [next-connect](https://github.com/hoangvvo/next-connect)
+## Tech Stack
 
-</div>
+**Client:** React 18, Next.js 13, Material UI 5
 
-<h3 align="center">Authentication and Account</h3>
+**Server:** Next.js 13, Node, Mongoose 7
 
-<div align="center">
+**Development:** Storybook 7, Mongodb Memory Server, Jest, Prettier
 
-- [x] Session-based authentication ([Passport.js](https://github.com/jaredhanson/passport))
-- [x] Sign up/Log in/Sign out API
-- [x] Authentication via email/password
-- [x] Email verification
-- [x] Password change
-- [x] Password reset via email
 
-</div>
+### Authentication and Account
+- Session-based authentication (Passport.js)
+- Sign up/Log in/Sign out API
+- Authentication via email/password
+- Email verification
+- Password change
+- Password reset via email
+- Profile
+- Profile picture, username, name, bio, email
+- Update user profile
+### Profile
+- Profile picture, username, name, bio, email
+- Update user profile
 
-<h3 align="center">Profile</h3>
+## Environment Variables
 
-<div align="center">
+To run this project, you will need to add the following environment variables to your .env file
 
-- [x] Profile picture, username, name, bio, email
-- [x] Update user profile
+`CLOUDINARY_URL` (optional, Cloudinary only) Cloudinary environment variable for configuration
 
-</div>
+`MONGODB_URI` (Required) The MongoDB Connection String (with credentials and database name)
 
-<div align="center">
-  
-<sup>Have any features that interest you, [make an issue](https://github.com/amingomezd/NextJS-MongoDB-MUI-Boilerplate/issues). Would like to work on a feature, [make a PR](https://github.com/amingomezd/NextJS-MongoDB-MUI-Boilerplate/pulls).<sup>
-  
-</div>
+`WEB_URI`(Required) The URL of your web app
 
-<h3 align="center">Environmental variables</h3>
+`NODEMAILER_CONFIG` (Required) JSON stringified nodemailer config. eg: ```{"service":"Gmail","auth":{"user":"example@gmail.com","pass":"aHR0cHM6Ly95b3V0dS5iZS9kUXc0dzlXZ1hjUQ=="}}```
+## Development
+- Start the development server by running yarn dev. Getting started by create a .env.local file with the above variables. See Environment Variables.
+- Start Storybook with yarn storybook
 
-Environmental variables in this project include:
+## Contributing
 
-- `MONGODB_URI` (Mandatory) The MongoDB Connection String (with credentials and database name)
-- `WEB_URI` (Mandatory) The _URL_ of your web app.
-- `CLOUDINARY_URL` (optional, Cloudinary **only**) Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration).
-- `NODEMAILER_CONFIG` (Mandatory) JSON stringified nodemailer config. eg. `{"service":"Gmail","auth":{"user":"example@gmail.com","pass":"aHR0cHM6Ly95b3V0dS5iZS9kUXc0dzlXZ1hjUQ=="}}`
+Contributions are always welcome!
 
-<h3 align="center">Development</h3>
+See `contributing.md` for ways to get started. You can create pull request to this project and be a contributor.
 
-- Start the development server by running `yarn dev`. Getting started by create a `.env.local` file with the above variables. See [Environment Variables](https://nextjs.org/docs/basic-features/environment-variables).
-- Start Storybook with `yarn storybook`
 
-<h2 align="center">Deployment</h2>
+## License
 
-This project can be deployed [anywhere Next.js can be deployed](https://nextjs.org/docs/deployment). Make sure to set the environment variables using the options provided by your cloud/hosting providers.
+[MIT](https://choosealicense.com/licenses/mit/)
 
-After building using `yarn build`, simply start the server using `yarn start`.
-
-You can also deploy this with serverless providers given the correct setup.
-
-<h2 align="center">Contributing</h2>
-
-<div align="center">
-  
-You can create pull request to this project and be a contributor.
-
-</div>
-
-<h2 align="center">
-  License
-</h2>
-
-<div align="center">
-  
-  [MIT](LICENSE)
-  
-</div>

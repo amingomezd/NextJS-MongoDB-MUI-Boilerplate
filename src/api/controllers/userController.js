@@ -1,40 +1,33 @@
 import { createUserValidated } from '@/src/api/services/user/createUserValidated';
 import { updateUserValidated } from '@/src/api/services/user/updateUserValidated';
 import { getUserByUsername } from '@/src/api/services/user/getUserByUsername';
+import { responseHelper } from '@/middlewares/responseHelper';
+import { httpError } from '@/middlewares/HttpError';
 
 export const getCurrentUser = async (req, res) => {
   if (!req.user) return res.json({ user: null });
   return res.json({ user: req.user });
 };
 
-export const getPublicUser = async (req, res) => {
+export const getPublicUser = responseHelper((req) => {
   const { username } = req.body;
 
-  const result = await getUserByUsername({ username });
+  return getUserByUsername({ username });
+});
 
-  if (result?.error) return res.status(result.error.code).send({ error: result.error.message });
-  return res.json(result.user);
-};
-
-export const registerUser = async (req, res) => {
+export const registerUser = responseHelper(async (req) => {
   const { username, name, email, password } = req.body;
-  const result = await createUserValidated({ username, name, email, password });
+  const user = await createUserValidated({ username, name, email, password });
 
-  if (result?.error) return res.status(result.error.code).send({ error: result.error.message });
-
-  req.logIn(result.user, (err) => {
-    if (err) throw err;
-    return res.status(201).json({
-      user: result.user
-    });
+  req.logIn(user, (err) => {
+    if (err) throw httpError(401, 'User registered. Error while trying to login, please try to login.');
   });
-};
 
-export const updateUserProfile = async (req, res) => {
+  return user;
+});
+
+export const updateUserProfile = responseHelper(async (req) => {
   const { name, bio, username, file } = req.body;
 
-  const result = await updateUserValidated({ userId: req.user._id, name, bio, username, file });
-
-  if (result?.error) return res.status(result.error.code).send({ error: result.error.message });
-  return res.json({ user: result.user });
-};
+  return updateUserValidated({ userId: req.user._id, name, bio, username, file });
+});

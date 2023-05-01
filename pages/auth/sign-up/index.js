@@ -33,7 +33,6 @@ const SignupPage = () => {
             username: usernameRef.current.value
           })
         });
-
         await mutate({ user: response.user }, false);
         toast.success('Your account has been created');
         await router.replace('/user/settings');

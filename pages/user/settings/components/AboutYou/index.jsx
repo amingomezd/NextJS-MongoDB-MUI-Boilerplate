@@ -28,12 +28,19 @@ const AboutYou = ({ user, mutate }) => {
       try {
         setIsLoading(true);
         const formData = new FormData();
-        formData.append('username', usernameRef.current.value);
-        formData.append('name', nameRef.current.value);
-        formData.append('bio', bioRef.current.value);
+        if (usernameRef.current.value !== user.username) {
+          formData.append('username', usernameRef.current.value);
+        }
+        if (nameRef.current.value !== user.name) {
+          formData.append('name', nameRef.current.value);
+        }
+        if (bioRef.current.value !== user.bio) {
+          formData.append('bio', bioRef.current.value);
+        }
         if (profilePictureRef.current.files[0]) {
           formData.append('profilePicture', profilePictureRef.current.files[0]);
         }
+
         const response = await fetcher('/api/user', {
           method: 'PATCH',
           body: formData

@@ -1,6 +1,7 @@
 import { slugUsername } from '@/src/common/utils';
 import * as cloudinaryService from '@/src/api/services/cloudinary';
 import User from '@/src/api/services/user/data/User';
+import { httpError } from '@/middlewares/HttpError';
 
 export const updateUserValidated = async ({ userId, name, bio, username, file }) => {
   let profilePicture;
@@ -13,16 +14,14 @@ export const updateUserValidated = async ({ userId, name, bio, username, file })
     username = slugUsername(username);
 
     if (await User.findUserByUsername(username)) {
-      return { error: { message: 'The username has already been taken.', code: 403 } };
+      throw httpError(403, 'The username has already been taken.');
     }
   }
 
-  const user = await User.updateUserById(userId, {
+  return User.updateUserById(userId, {
     ...(username && { username }),
     ...(name && { name }),
     ...(typeof bio === 'string' && { bio }),
     ...(profilePicture && { profilePicture })
   });
-
-  return { user };
 };

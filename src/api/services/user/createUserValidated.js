@@ -2,6 +2,7 @@ import { slugUsername } from '@/src/common/utils';
 import isEmail from 'validator/lib/isEmail';
 import bcrypt from 'bcryptjs';
 import User from '@/src/api/services/user/data/User';
+import { httpError } from '@/middlewares/HttpError';
 
 /**
  * Validates user input and creates a new user.
@@ -20,13 +21,13 @@ export const createUserValidated = async ({ username, name, email, password }) =
   const normalizedUsername = slugUsername(username);
 
   if (!isEmail(email)) {
-    return { error: { message: 'The email you entered is invalid.', code: 400 } };
+    throw httpError(400, 'The email you entered is invalid.');
   }
   if (await User.findUserByEmail(email)) {
-    return { error: { message: 'The email has already been used.', code: 403 } };
+    throw httpError(403, 'The email has already been used.');
   }
   if (await User.findUserByUsername(normalizedUsername)) {
-    return { error: { message: 'The username has already been taken.', code: 403 } };
+    throw httpError(403, 'The username has already been taken.');
   }
 
   let user;
@@ -41,8 +42,8 @@ export const createUserValidated = async ({ username, name, email, password }) =
     });
   } catch (e) {
     console.error(e);
-    throw Error('An error occurred while registering user');
+    throw httpError(503, 'An error occurred while registering user');
   }
 
-  return { user };
+  return user;
 };

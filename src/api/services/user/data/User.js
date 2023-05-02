@@ -20,6 +20,10 @@ async function findUserForAuth(userId) {
   return User.findById(userId, '-originalPassword -__v');
 }
 
+async function findUserByUsername(username) {
+  return User.findOne({ username }, '-originalPassword -email -emailVerified');
+}
+
 async function findUserByEmail(email) {
   email = normalizeEmail(email);
   return User.findOne({ email }, '-originalPassword -email -emailVerified');
@@ -40,6 +44,7 @@ async function updateUserById(id, data) {
 
 userSchema.statics.findUserWithEmailAndPassword = findUserWithEmailAndPassword;
 userSchema.statics.findUserForAuth = findUserForAuth;
+userSchema.statics.findUserByUsername = findUserByUsername;
 userSchema.statics.findUserByEmail = findUserByEmail;
 userSchema.statics.updateUserById = updateUserById;
 

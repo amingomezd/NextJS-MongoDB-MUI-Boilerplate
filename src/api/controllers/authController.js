@@ -4,64 +4,49 @@ import { sendPasswordResetEmail } from '@/src/api/services/auth/sendPasswordRese
 import { updateUserPasswordByOldPassword } from '@/src/api/services/auth/updateUserPasswordByOldPassword';
 import { updateUserPasswordByToken } from '@/src/api/services/auth/updateUserPasswordByToken';
 import { getPasswordResetToken } from '@/src/api/services/auth/getPasswordResetToken';
+import { responseHelper } from '@/middlewares/responseHelper';
 
-export const getAuthenticatedUser = (req, res) => {
-  return res.json({ user: req.user });
-};
+export const getAuthenticatedUser = responseHelper((req) => {
+  return { user: req.user };
+});
 
-export const logout = async (req, res) => {
+export const logout = responseHelper(async (req) => {
   await req.session.destroy();
-  return res.status(204).end();
-};
+  return { status: 204 };
+});
 
-export const verifyEmail = async (req, res) => {
+export const verifyEmail = responseHelper(async (req) => {
   const { token } = req.query;
-  const result = await verifyEmailByToken({ token });
+  await verifyEmailByToken({ token });
+  return true;
+});
 
-  if (result?.error) return res.status(result.error.code).send({ error: result.error.message });
-  return res.json(true);
-};
-
-export const sendVerificationEmail = async (req, res) => {
+export const sendVerificationEmail = responseHelper(async (req) => {
   const { _id, email, name } = req.user;
-
   await sendVerificationEmailWithToken({ userId: _id, email, name });
+  return { status: 204 };
+});
 
-  return res.status(204).end();
-};
-
-export const requestPasswordReset = async (req, res) => {
+export const requestPasswordReset = responseHelper(async (req) => {
   const { email } = req.body;
+  await sendPasswordResetEmail({ userEmail: email });
+  return { status: 204 };
+});
 
-  const result = await sendPasswordResetEmail({ userEmail: email });
-
-  if (result?.error) return res.status(result.error.code).send({ error: result.error.message });
-  return res.status(204).end();
-};
-
-export const resetPasswordWithToken = async (req, res) => {
+export const resetPasswordWithToken = responseHelper(async (req) => {
   const { token, password } = req.body;
+  await updateUserPasswordByToken({ token, newPassword: password });
+  return { status: 204 };
+});
 
-  const result = updateUserPasswordByToken({ token, newPassword: password });
-
-  if (result?.error) return res.status(result.error.code).send({ error: result.error.message });
-  return res.status(204).end();
-};
-
-export const verifyPasswordResetToken = async (req, res) => {
+export const verifyPasswordResetToken = responseHelper(async (req) => {
   const { token } = req.query;
-
   const result = await getPasswordResetToken({ token });
+  return { token: result._id, valid: !!result };
+});
 
-  if (result?.error) return res.status(result.error.code).send({ error: result.error.message });
-  return res.json({ token: result.tokenDoc._id, valid: !!result.tokenDoc });
-};
-
-export const updateUserPassword = async (req, res) => {
+export const updateUserPassword = responseHelper(async (req) => {
   const { oldPassword, newPassword } = req.body;
-
-  const result = await updateUserPasswordByOldPassword({ id: req.user._id, oldPassword, newPassword });
-
-  if (result?.error) return res.status(result.error.code).send({ error: result.error.message });
-  return res.status(204).end();
-};
+  await updateUserPasswordByOldPassword({ id: req.user._id, oldPassword, newPassword });
+  return { status: 204 };
+});

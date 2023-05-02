@@ -10,6 +10,19 @@ const Appbar = () => {
   const { data, mutate } = useCurrentUser();
   const user = data?.user;
 
+  const onSignOut = useCallback(async () => {
+    try {
+      await fetcher('/api/auth', {
+        method: 'DELETE'
+      });
+      toast.success('You have been signed out');
+      mutate({ user: null });
+      await router.replace('/auth/login');
+    } catch (e) {
+      toast.error(e.message);
+    }
+  }, [mutate]);
+
   const userSettings = [
     { name: 'Profile', url: `/user/${user?.username}` },
     { name: 'Settings', url: '/user/settings' }
@@ -25,19 +38,6 @@ const Appbar = () => {
     { name: 'Login', url: '/auth/login', variant: 'outlined' },
     { name: 'Sign Up', url: '/auth/sign-up', variant: 'contained' }
   ];
-
-  const onSignOut = useCallback(async () => {
-    try {
-      await fetcher('/api/auth', {
-        method: 'DELETE'
-      });
-      toast.success('You have been signed out');
-      mutate({ user: null });
-      router.replace('/auth/login');
-    } catch (e) {
-      toast.error(e.message);
-    }
-  }, [mutate]);
 
   return (
     <AppbarView

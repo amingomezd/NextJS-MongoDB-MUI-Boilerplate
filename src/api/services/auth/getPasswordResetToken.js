@@ -1,11 +1,12 @@
 import Token from '@/src/api/services/auth/data/Token';
+import { httpError } from '@/middlewares/HttpError';
 
 export const getPasswordResetToken = async ({ token }) => {
   const tokenDoc = await Token.findTokenByIdAndType(token, 'passwordReset');
 
   if (!tokenDoc) {
-    return { error: { message: 'Invalid Token.', code: 404 } };
+    throw httpError(404, 'Invalid Token.');
   }
 
-  return { tokenDoc };
+  return tokenDoc;
 };

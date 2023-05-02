@@ -5,14 +5,14 @@ import PageContentBox from '@/src/components/Layout/PageContentBox';
 import PageLayout from '@/src/components/Layout/PageLayout';
 import { Stack } from '@mui/material';
 
-const SettingPageView = ({ data, mutate }) => {
+const SettingPageView = ({ data }) => {
   return (
     <PageLayout title='Settings'>
       <PageContentBox>
         {data?.user ? (
           <Stack spacing={3}>
             <EmailVerify user={data.user} />
-            <AboutYou user={data.user} mutate={mutate} />
+            <AboutYou user={data.user} />
             <ChangePassword user={data.user} />
           </Stack>
         ) : null}

@@ -12,7 +12,7 @@ export default function UserPage() {
 
   useEffect(() => {
     if (!isLoading) {
-      if (!data?.user) {
+      if (!data?.user && query.username) {
         fetcher(`/api/user`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -20,7 +20,7 @@ export default function UserPage() {
             username: query.username
           })
         })
-          .then((user) => {
+          .then(({ user }) => {
             setUser(user);
           })
           .catch((error) => {

@@ -2,13 +2,15 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { fetcher } from '@/src/common/utils/fetch';
 import toast from 'react-hot-toast';
 import AboutYouView from './AboutYouView';
+import { useCurrentUser } from '@/src/hooks/userHooks';
 
-const AboutYou = ({ user, mutate }) => {
+const AboutYou = ({ user }) => {
   const usernameRef = useRef();
   const nameRef = useRef();
   const bioRef = useRef();
   const profilePictureRef = useRef();
   const [avatarHref, setAvatarHref] = useState(user.profilePicture);
+  const { mutate } = useCurrentUser();
 
   const onAvatarChange = useCallback((e) => {
     const file = e.currentTarget.files?.[0];
@@ -45,6 +47,7 @@ const AboutYou = ({ user, mutate }) => {
           method: 'PATCH',
           body: formData
         });
+
         mutate({ user: response.user }, false);
         toast.success('Your profile has been updated');
       } catch (e) {

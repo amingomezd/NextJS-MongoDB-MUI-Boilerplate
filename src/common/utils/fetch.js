@@ -1,12 +1,9 @@
 export const fetcher = (...args) => {
   return fetch(...args).then(async (res) => {
-    let payload;
-    try {
-      if (res.status === 204) return null; // 204 does not have body
-      payload = await res.json();
-    } catch (e) {
-      /* noop */
-    }
+    if (res.status === 204) return null;
+
+    const payload = await res.json();
+
     if (res.ok) {
       return payload;
     } else {

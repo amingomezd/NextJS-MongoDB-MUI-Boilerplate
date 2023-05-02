@@ -4,15 +4,15 @@ import { getUserByUsername } from '@/src/api/services/user/getUserByUsername';
 import { responseHelper } from '@/middlewares/responseHelper';
 import { httpError } from '@/middlewares/HttpError';
 
-export const getCurrentUser = async (req, res) => {
-  if (!req.user) return res.json({ user: null });
-  return res.json({ user: req.user });
-};
+export const getCurrentUser = responseHelper((req) => {
+  if (!req.user) return null;
+  return { user: req.user };
+});
 
-export const getPublicUser = responseHelper((req) => {
+export const getPublicUser = responseHelper(async (req) => {
   const { username } = req.body;
-
-  return getUserByUsername({ username });
+  const user = await getUserByUsername({ username });
+  return { user };
 });
 
 export const registerUser = responseHelper(async (req) => {
@@ -23,11 +23,11 @@ export const registerUser = responseHelper(async (req) => {
     if (err) throw httpError(401, 'User registered. Error while trying to login, please try to login.');
   });
 
-  return user;
+  return { user };
 });
 
 export const updateUserProfile = responseHelper(async (req) => {
   const { name, bio, username, file } = req.body;
-
-  return updateUserValidated({ userId: req.user._id, name, bio, username, file });
+  const user = await updateUserValidated({ userId: req.user._id, name, bio, username, file });
+  return { user };
 });

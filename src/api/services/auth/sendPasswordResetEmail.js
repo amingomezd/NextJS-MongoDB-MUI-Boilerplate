@@ -2,13 +2,14 @@ import normalizeEmail from 'validator/lib/normalizeEmail';
 import User from '@/src/api/services/user/data/User';
 import Token from '@/src/api/services/auth/data/Token';
 import { sendMail } from '@/src/api/services/sendMail';
+import { httpError } from '@/middlewares/HttpError';
 
 export const sendPasswordResetEmail = async ({ userEmail }) => {
   const email = normalizeEmail(userEmail);
   const user = await User.findUserByEmail(email);
 
   if (!user) {
-    return { error: { message: 'We couldn’t find that email. Please try again.', code: 400 } };
+    throw httpError(400, 'We couldn’t find that email. Please try again.');
   }
 
   let token = await Token.findOne({ creatorId: user._id });

@@ -15,6 +15,7 @@ passport.deserializeUser((req, id, done) => {
 });
 
 passport.use(
+  'local',
   new LocalStrategy({ usernameField: 'email', passReqToCallback: true }, async (req, email, password, done) => {
     const user = await getUserWithEmailAndPassword(email, password);
 

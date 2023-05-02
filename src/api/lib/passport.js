@@ -1,13 +1,14 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import User from '@/src/api/services/user/data/User';
+import { getUserWithEmailAndPassword } from '@/src/api/services/auth/getUserWithEmailAndPassword';
+import { getUserForAuth } from '@/src/api/services/auth/getUserForAuth';
 
 passport.serializeUser((user, done) => {
   done(null, user._id);
 });
 
 passport.deserializeUser((req, id, done) => {
-  return User.findUserForAuth(id).then(
+  return getUserForAuth(id).then(
     (user) => done(null, user),
     (err) => done(err)
   );
@@ -15,7 +16,7 @@ passport.deserializeUser((req, id, done) => {
 
 passport.use(
   new LocalStrategy({ usernameField: 'email', passReqToCallback: true }, async (req, email, password, done) => {
-    const user = await User.findUserWithEmailAndPassword(email, password);
+    const user = await getUserWithEmailAndPassword(email, password);
 
     if (user) {
       return done(null, user);

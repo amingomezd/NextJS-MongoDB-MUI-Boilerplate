@@ -13,8 +13,6 @@ router
   .use(expressWrapper(cors()))
 
   // User Registration
-  // Look into future versions of passport.js that implement an option to disable the automatic regeneration of session
-  // and stop using/deprecate the workaround: "addSessionFunctionsToRequest"
   .post(
     jsonParser,
     validateBody(

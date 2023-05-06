@@ -15,6 +15,7 @@ https://next-js-mongo-db-mui-boilerplate.vercel.app/
 ## Features
 
 - MVC Architecture
+- Automatic dark/light mode
 - Clean Material UI v5 implementation 💅
 - Full API Routes implementation and Serverless ready
 - Middleware pattern, compatible with Express ecosystem, powered by next-connect

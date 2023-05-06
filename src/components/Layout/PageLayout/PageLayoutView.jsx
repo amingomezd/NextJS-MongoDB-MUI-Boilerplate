@@ -5,9 +5,12 @@ import { styles } from './PageLayoutView.styles';
 import Copyright from '../Copyright';
 import Container from '@mui/material/Container';
 import PageTitle from '../PageTitle';
+import { useTheme } from '@mui/material';
 
 const PageLayoutView = ({ children, noPadding, title, subtitle }) => {
-  const style = styles({ noPadding });
+  const muiTheme = useTheme();
+  const style = styles({ noPadding, muiTheme });
+
   return (
     <Box sx={style.mainBox}>
       <Appbar />

@@ -1,11 +1,11 @@
-export const styles = ({ noPadding }) => {
+export const styles = ({ noPadding, muiTheme }) => {
   return {
     mainBox: {
       display: 'flex',
       flexDirection: 'column',
       flex: 1,
       minHeight: '100%',
-      backgroundColor: '#ffffff'
+      backgroundColor: muiTheme.palette.background.paper
     },
     children: {
       paddingTop: !noPadding && '40px',

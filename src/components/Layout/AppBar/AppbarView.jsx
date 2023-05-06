@@ -1,5 +1,17 @@
 import React, { useState } from 'react';
-import { AppBar, Chip, Divider, Grid, IconButton, Menu, MenuItem, Stack, Toolbar, Tooltip } from '@mui/material';
+import {
+  AppBar,
+  Chip,
+  Divider,
+  Grid,
+  IconButton,
+  Menu,
+  MenuItem,
+  Stack,
+  Toolbar,
+  Tooltip,
+  useTheme
+} from '@mui/material';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -13,6 +25,7 @@ const AppbarView = ({ authLinks, userSettings, authenticatedLinks, user, onSignO
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const isDesktop = useIsDesktop();
+  const muiTheme = useTheme();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -152,7 +165,7 @@ const AppbarView = ({ authLinks, userSettings, authenticatedLinks, user, onSignO
   );
 
   return (
-    <AppBar position='static' sx={{ backgroundColor: 'white', zIndex: 2 }}>
+    <AppBar position='static' sx={{ backgroundColor: muiTheme.palette.background.paper, zIndex: 2 }}>
       <Container>
         <Toolbar disableGutters>{isDesktop ? desktopView : mobileView}</Toolbar>
       </Container>

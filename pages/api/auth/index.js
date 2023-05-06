@@ -1,4 +1,4 @@
-import passport, { addSessionFunctionsToRequest } from '@/src/api/lib/passport';
+import passport from '@/src/api/lib/passport';
 import { ncOpts } from '@/src/config/nextConnectConfig';
 import { auths } from '@/middlewares';
 import { createRouter, expressWrapper } from 'next-connect';
@@ -14,9 +14,7 @@ router
   .use(responseTime)
 
   // User login
-  // Look into future versions of passport.js that implement an option to disable the automatic regeneration of session
-  // and stop using/deprecate the workaround: "addSessionFunctionsToRequest"
-  .post(addSessionFunctionsToRequest, passport.authenticate('local'), authController.getAuthenticatedUser)
+  .post(passport.authenticate('local'), authController.getAuthenticatedUser)
 
   .delete(authController.logout);
 

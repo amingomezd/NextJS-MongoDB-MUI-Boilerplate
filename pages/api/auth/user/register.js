@@ -5,7 +5,6 @@ import * as userController from '@/src/api/controllers/userController';
 import { jsonParser } from '@/src/common/utils/bodyParser';
 import { ValidateProps } from '@/src/config/constants';
 import { ncOpts } from '@/src/config/nextConnectConfig';
-import { addSessionFunctionsToRequest } from '@/src/api/lib/passport';
 
 const router = createRouter();
 
@@ -17,7 +16,6 @@ router
   // Look into future versions of passport.js that implement an option to disable the automatic regeneration of session
   // and stop using/deprecate the workaround: "addSessionFunctionsToRequest"
   .post(
-    addSessionFunctionsToRequest,
     jsonParser,
     validateBody(
       {

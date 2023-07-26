@@ -2,16 +2,17 @@ import Document, { Html, Head, Main, NextScript } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
 import PropTypes from 'prop-types';
 import createEmotionCache from '@/src/config/createEmotionCache';
-import theme, { roboto } from '@/src/config/theme';
+import { theme, roboto } from '@/src/config/theme';
 
 export default function MyDocument(props) {
   const { emotionStyleTags } = props;
+  const defaultTheme = theme();
 
   return (
     <Html style={{ height: '100%' }} className={roboto.className}>
       <Head>
         <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='true' />
-        <meta name='theme-color' content={theme.palette.primary.main} />
+        <meta name='theme-color' content={defaultTheme.palette.primary.main} />
         <meta name='emotion-insertion-point' content='' />
         {emotionStyleTags}
       </Head>
